@@ -1,0 +1,262 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dual-scale layered comparison chart with taxonomic composition strip using ALA monitoring records and EPBC threatened listings data.",
+  "title": {
+    "text": "Monitoring Records vs Threatened Species Listings",
+    "subtitle": "ALA biodiversity records compared with EPBC listing increases, plus taxonomic composition of new listings",
+    "anchor": "start",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "color": "#2F241D",
+    "subtitleColor": "#5C5047",
+    "subtitlePadding": 10
+  },
+  "data": {
+    "url": "chart12_monitoring_vs_threatened_listings_combined.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "vconcat": [
+    {
+      "width": 900,
+      "height": 360,
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "cornerRadiusEnd": 4,
+            "opacity": 0.72,
+            "color": "#B8794C"
+          },
+          "encoding": {
+            "x": {
+              "field": "year_group",
+              "type": "ordinal",
+              "title": "Time period",
+              "axis": {
+                "labelAngle": -25,
+                "labelFontSize": 11,
+                "titleFontSize": 13,
+                "labelLimit": 120,
+                "titlePadding": 15
+              }
+            },
+            "y": {
+              "field": "ALA_records_millions",
+              "type": "quantitative",
+              "title": "ALA biodiversity records (millions)",
+              "axis": {
+                "labelFontSize": 12,
+                "titleFontSize": 13,
+                "titleColor": "#8B5A2B",
+                "labelColor": "#8B5A2B",
+                "titlePadding": 22
+              }
+            },
+            "tooltip": [
+              {
+                "field": "year_group",
+                "type": "ordinal",
+                "title": "Period"
+              },
+              {
+                "field": "ALA_records",
+                "type": "quantitative",
+                "title": "ALA records",
+                "format": ","
+              },
+              {
+                "field": "ALA_records_millions",
+                "type": "quantitative",
+                "title": "ALA records, millions",
+                "format": ".2f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "line",
+            "point": {
+              "filled": true,
+              "size": 85
+            },
+            "strokeWidth": 3,
+            "color": "#1F5F5B"
+          },
+          "encoding": {
+            "x": {
+              "field": "year_group",
+              "type": "ordinal",
+              "titlePadding": 25
+            },
+            "y": {
+              "field": "EPBC_total_listing_increase_since_2000",
+              "type": "quantitative",
+              "title": "EPBC listing increase since 2000",
+              "axis": {
+                "orient": "right",
+                "labelFontSize": 12,
+                "titleFontSize": 13,
+                "titleColor": "#1F5F5B",
+                "labelColor": "#1F5F5B",
+                "titlePadding": 18
+              }
+            },
+            "tooltip": [
+              {
+                "field": "year_group",
+                "type": "ordinal",
+                "title": "Period"
+              },
+              {
+                "field": "EPBC_reference_year",
+                "type": "quantitative",
+                "title": "EPBC reference year",
+                "format": "d"
+              },
+              {
+                "field": "EPBC_total_listing_increase_since_2000",
+                "type": "quantitative",
+                "title": "EPBC listing increase",
+                "format": ","
+              }
+            ]
+          }
+        }
+      ],
+      "resolve": {
+        "scale": {
+          "y": "independent"
+        }
+      }
+    },
+    {
+      "width": 900,
+      "height": 190,
+      "title": {
+        "text": "Taxonomic Composition of Threatened Listings",
+        "anchor": "start",
+        "fontSize": 15,
+        "color": "#2F241D"
+      },
+      "transform": [
+        {
+          "fold": [
+            "Flora",
+            "Invertebrates",
+            "Birds",
+            "Mammals",
+            "Fish",
+            "Reptiles",
+            "Frogs"
+          ],
+          "as": [
+            "taxonomic_group",
+            "listing_count"
+          ]
+        },
+        {
+          "filter": "datum.listing_count != null && datum.listing_count > 0"
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "height": 18
+      },
+      "encoding": {
+        "y": {
+          "field": "year_group",
+          "type": "ordinal",
+          "title": "Time period",
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "labelLimit": 150
+          }
+        },
+        "x": {
+          "field": "listing_count",
+          "type": "quantitative",
+          "stack": "normalize",
+          "title": "Composition of threatened listings (%)",
+          "axis": {
+            "format": ".0%",
+            "labelFontSize": 12,
+            "titleFontSize": 13
+          }
+        },
+        "color": {
+          "field": "taxonomic_group",
+          "type": "nominal",
+          "title": "Taxonomic group",
+          "scale": {
+            "domain": [
+              "Flora",
+              "Invertebrates",
+              "Birds",
+              "Mammals",
+              "Fish",
+              "Reptiles",
+              "Frogs"
+            ],
+            "range": [
+              "#4F7C45",
+              "#B9893A",
+              "#4A79A8",
+              "#8B5A2B",
+              "#5B8FA8",
+              "#A65A5A",
+              "#81914A"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "titleFontSize": 12,
+            "labelFontSize": 11,
+            "columns": 4
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year_group",
+            "type": "ordinal",
+            "title": "Period"
+          },
+          {
+            "field": "taxonomic_group",
+            "type": "nominal",
+            "title": "Taxonomic group"
+          },
+          {
+            "field": "listing_count",
+            "type": "quantitative",
+            "title": "Listing count",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "spacing": 20,
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "grid": true,
+      "gridColor": "#E5E7EB",
+      "domainColor": "#9CA3AF",
+      "tickColor": "#9CA3AF",
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    },
+    "legend": {
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    }
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Ecological Communities by State/Territory and Threatened Status",
+    "subtitle": "Labels show percentage of all occurrences",
+    "anchor": "start",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "subtitlePadding": 15
+  },
+  "width": 800,
+  "height": 300,
+  "data": {
+    "url": "chart6_ecological_community_heatmap_percentage.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "params": [
+    {
+      "name": "sortOrder",
+      "value": "descending",
+      "bind": {
+        "input": "select",
+        "options": ["descending", "ascending"],
+        "labels": ["Descending", "Ascending"],
+        "name": "Order: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "toNumber(datum.percentage_of_all_occurrences)",
+      "as": "Percentage"
+    },
+    {
+      "calculate": "toNumber(datum.community_count)",
+      "as": "Community_Count"
+    },
+    {
+      "calculate": "format(datum.Percentage, '.2f') + '%'",
+      "as": "Percentage_Label"
+    },
+    {
+      "calculate": "sortOrder == 'ascending' ? -datum.Percentage : datum.Percentage",
+      "as": "Sort_Percentage"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State / Territory",
+          "sort": {
+            "op": "sum",
+            "field": "Sort_Percentage",
+            "order": "descending"
+          },
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titlePadding": 15,
+            "labelPadding": 10
+          }
+        },
+        "y": {
+          "field": "epbc_status",
+          "type": "nominal",
+          "title": "Threatened Status",
+          "sort": [
+            "Critically Endangered",
+            "Endangered",
+            "Vulnerable"
+          ],
+          "axis": {
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titlePadding": 15,
+            "labelPadding": 10
+          }
+        },
+        "color": {
+          "field": "Percentage",
+          "type": "quantitative",
+          "title": "All Occurrences (%)",
+          "scale": {
+            "range": [
+              "#2166AC",
+              "#67A9CF",
+              "#D1E5F0",
+              "#FDDBC7",
+              "#EF8A62",
+              "#B2182B"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 13,
+            "labelFontSize": 12,
+            "gradientLength": 220,
+            "gradientThickness": 14
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / Territory"
+          },
+          {
+            "field": "epbc_status",
+            "type": "nominal",
+            "title": "Threatened Status"
+          },
+          {
+            "field": "Community_Count",
+            "type": "quantitative",
+            "title": "Community Count"
+          },
+          {
+            "field": "Percentage",
+            "type": "quantitative",
+            "title": "Percentage of All Occurrences (%)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "sort": {
+            "op": "sum",
+            "field": "Sort_Percentage",
+            "order": "descending"
+          }
+        },
+        "y": {
+          "field": "epbc_status",
+          "type": "nominal",
+          "sort": [
+            "Critically Endangered",
+            "Endangered",
+            "Vulnerable"
+          ]
+        },
+        "text": {
+          "field": "Percentage_Label"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Percentage >= 10",
+            "value": "white"
+          },
+          "value": "#111827"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#FFFFFF",
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelColor": "#374151",
+      "titleColor": "#111827",
+      "domain": false,
+      "ticks": false
+    },
+    "legend": {
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    },
+    "title": {
+      "color": "#111827",
+      "subtitleColor": "#4B5563"
+    }
+  }
+}

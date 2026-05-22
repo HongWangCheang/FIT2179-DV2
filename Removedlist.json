@@ -1,0 +1,245 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Decorated line chart showing yearly count of species removed from the list.",
+  "title": {
+    "text": "Species Removed from the Threatened List Over Time",
+    "subtitle": "Yearly count of removals from 2001 onward",
+    "anchor": "start",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "color": "#2F241D",
+    "subtitleColor": "#6B5B4D"
+  },
+  "width": 1050,
+  "height": 420,
+  "data": {
+    "url": "Removed from list.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.Count)",
+      "as": "Count_num"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "opacity": 0.22,
+        "color": "#C49A6C"
+      },
+      "encoding": {
+        "x": {
+          "field": "Years",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": -45,
+            "labelFontSize": 11,
+            "titleFontSize": 13
+          }
+        },
+        "y": {
+          "field": "Count_num",
+          "type": "quantitative",
+          "title": "Number Removed from List",
+          "axis": {
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titlePadding": 15
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone",
+        "strokeWidth": 4,
+        "color": "#8B5A2B"
+      },
+      "encoding": {
+        "x": {
+          "field": "Years",
+          "type": "ordinal",
+          "title": "Year"
+        },
+        "y": {
+          "field": "Count_num",
+          "type": "quantitative",
+          "title": "Number Removed from List"
+        },
+        "tooltip": [
+          {
+            "field": "Years",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "Count_num",
+            "type": "quantitative",
+            "title": "Removed Count"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 90,
+        "color": "#8B5A2B",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "Years",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Count_num",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "Years",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "Count_num",
+            "type": "quantitative",
+            "title": "Removed Count"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Count_num == 72"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 190,
+        "color": "#A33A2A",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "Years",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Count_num",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "Years",
+            "type": "ordinal",
+            "title": "Peak Year"
+          },
+          {
+            "field": "Count_num",
+            "type": "quantitative",
+            "title": "Highest Removed Count"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.Count_num == 72"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "dy": -12,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#A33A2A"
+      },
+      "encoding": {
+        "x": {
+          "field": "Years",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "Count_num",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Peak removal: 72"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          5,
+          5
+        ],
+        "strokeWidth": 1.5,
+        "color": "#6B7280"
+      },
+      "encoding": {
+        "y": {
+          "aggregate": "mean",
+          "field": "Count_num",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": 385,
+        "dy": -5,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#6B7280"
+      },
+      "encoding": {
+        "y": {
+          "aggregate": "mean",
+          "field": "Count_num",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Average removals"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#FFFFFF",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "grid": true,
+      "gridColor": "#E8E2DA",
+      "domainColor": "#B8AEA3",
+      "tickColor": "#B8AEA3",
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    }
+  }
+}

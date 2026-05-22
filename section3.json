@@ -1,0 +1,179 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Wetland Condition and Waterbird Abundance by Year",
+    "subtitle": "Each bubble represents one wetland-site survey in the Murray-Darling Basin",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "start",
+    "subtitlePadding": 10
+  },
+  "width": 700,
+  "height": 430,
+  "data": {
+    "url": "waterbird_condition_bubble.csv"
+  },
+  "params": [
+    {
+      "name": "selectedYear",
+      "value": "All",
+      "bind": {
+        "input": "select",
+        "name": "Filter year: ",
+        "options": [
+          "All",
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2020",
+          "2021",
+          "2022",
+          "2023"
+        ]
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "toString(datum.SurvYear)",
+      "as": "YearLabel"
+    },
+    {
+      "filter": "datum.SumOfCount > 0 && datum.PercentFilled >= 0 && datum.PercentFilled <= 100"
+    },
+    {
+      "filter": "selectedYear == 'All' || datum.YearLabel == selectedYear"
+    }
+  ],
+  "mark": {
+    "type": "circle",
+    "opacity": 0.72,
+    "stroke": "white",
+    "strokeWidth": 0.8
+  },
+  "encoding": {
+    "x": {
+      "field": "PercentFilled",
+      "type": "quantitative",
+      "axis": {
+        "title": "Wetland Fill Level (%)",
+        "format": ".0f",
+        "titlePadding": 15
+      },
+      "scale": {
+        "domain": [0, 100]
+      }
+    },
+    "y": {
+      "field": "SumOfCount",
+      "type": "quantitative",
+      "axis": {
+        "title": "Waterbird Abundance",
+        "titlePadding": 18
+      },
+      "scale": {
+        "type": "sqrt"
+      }
+    },
+    "size": {
+      "field": "WetlandArea",
+      "type": "quantitative",
+      "legend": {
+        "title": "Wetland Area"
+      },
+      "scale": {
+        "range": [40, 1200]
+      }
+    },
+    "color": {
+      "field": "YearLabel",
+      "type": "nominal",
+      "legend": {
+        "title": "Survey Year",
+        "columns": 2
+      },
+      "scale": {
+        "domain": [
+          "2007",
+          "2008",
+          "2009",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2020",
+          "2021",
+          "2022",
+          "2023"
+        ],
+        "range": [
+          "#1f77b4",
+          "#ff7f0e",
+          "#2ca02c",
+          "#d62728",
+          "#9467bd",
+          "#8c564b",
+          "#e377c2",
+          "#7f7f7f",
+          "#bcbd22",
+          "#17becf",
+          "#393b79",
+          "#637939",
+          "#8c6d31",
+          "#843c39",
+          "#7b4173",
+          "#3182bd"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "WetlandName",
+        "type": "nominal",
+        "title": "Wetland"
+      },
+      {
+        "field": "SurvYear",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "PercentFilled",
+        "type": "quantitative",
+        "title": "Percent filled",
+        "format": ".1f"
+      },
+      {
+        "field": "SumOfCount",
+        "type": "quantitative",
+        "title": "Waterbirds counted",
+        "format": ","
+      },
+      {
+        "field": "WetlandArea",
+        "type": "quantitative",
+        "title": "Wetland area",
+        "format": ","
+      },
+      {
+        "field": "SpeciesRichness",
+        "type": "quantitative",
+        "title": "Species recorded"
+      }
+    ]
+  }
+}
