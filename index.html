@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australia's Threatened Species — Visualisation Atlas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="reading-progress"></div>
+
+  <!-- ── HERO ──────────────────────────────────────────── -->
+  <header class="hero">
+    <!-- Floating background particles -->
+    <div class="hero-particles" aria-hidden="true">
+      <span class="p" style="--x:8%;--y:80%;--s:5px;--d:9s;--dl:-2s;"></span>
+      <span class="p" style="--x:18%;--y:45%;--s:3px;--d:13s;--dl:-6s;"></span>
+      <span class="p" style="--x:32%;--y:70%;--s:7px;--d:11s;--dl:-1s;"></span>
+      <span class="p" style="--x:47%;--y:30%;--s:4px;--d:8s;--dl:-4s;"></span>
+      <span class="p" style="--x:58%;--y:65%;--s:6px;--d:15s;--dl:-8s;"></span>
+      <span class="p" style="--x:70%;--y:50%;--s:3px;--d:10s;--dl:-3s;"></span>
+      <span class="p" style="--x:82%;--y:75%;--s:8px;--d:12s;--dl:-5s;"></span>
+      <span class="p" style="--x:91%;--y:35%;--s:4px;--d:7s;--dl:-7s;"></span>
+      <span class="p" style="--x:25%;--y:20%;--s:5px;--d:14s;--dl:-2s;"></span>
+      <span class="p" style="--x:75%;--y:85%;--s:3px;--d:9s;--dl:-9s;"></span>
+    </div>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Australia's Biodiversity in Crisis</p>
+      <h1 class="hero-title">Threatened Species<br>in Australia</h1>
+      <p class="hero-sub">
+        A data-driven exploration of the scale, causes, and trajectories of
+        biodiversity loss across Australia's unique ecosystems.
+      </p>
+      <a href="#section-overview" class="hero-cta">Explore the Data ↓</a>
+    </div>
+    <div class="hero-wave"></div>
+  </header>
+
+  <!-- ── NAV ───────────────────────────────────────────── -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <a href="#section-overview">01&nbsp;&nbsp;Scale of Crisis</a>
+      <a href="#section-composition">02&nbsp;&nbsp;Composition &amp; Habitat</a>
+      <a href="#section-trends">03&nbsp;&nbsp;Trends &amp; Pressures</a>
+      <a href="#section-ecosystems">04&nbsp;&nbsp;Ecosystems Under Threat</a>
+      <a href="#section-conservation">05&nbsp;&nbsp;Wetlands &amp; Conservation</a>
+      <a href="#section-monitoring">06&nbsp;&nbsp;Conservation &amp; Recovery</a>
+    </div>
+  </nav>
+
+  <!-- ── STATS STRIP ───────────────────────────────────── -->
+  <div class="stats-strip">
+    <div class="stats-inner">
+      <div class="stat">
+        <div class="stat-value">
+          <span class="stat-num" data-target="1900">1,900</span><span class="stat-suffix">+</span>
+        </div>
+        <span class="stat-label">Species listed as threatened under the EPBC Act</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat">
+        <div class="stat-value">
+          <span class="stat-num" data-target="67">67</span>
+        </div>
+        <span class="stat-label">Ramsar wetland sites designated across Australia</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat">
+        <div class="stat-value">
+          <span class="stat-num" data-target="24">24</span>
+        </div>
+        <span class="stat-label">Years of EPBC Act species monitoring and listing</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WILDLIFE SHOWCASE STRIP ───────────────────────── -->
+  <div class="wildlife-strip" aria-hidden="true">
+    <div class="wildlife-strip__inner">
+      <div class="wb-animal">
+        <div class="wb-icon">🦘</div>
+        <span class="wb-name">Kangaroo</span>
+      </div>
+      <div class="wb-animal">
+        <div class="wb-icon">🐨</div>
+        <span class="wb-name">Koala</span>
+      </div>
+      <div class="wb-animal">
+        <div class="wb-icon">🦎</div>
+        <span class="wb-name">Monitor Lizard</span>
+      </div>
+      <div class="wb-animal">
+        <div class="wb-icon">🐸</div>
+        <span class="wb-name">Tree Frog</span>
+      </div>
+      <div class="wb-animal">
+        <div class="wb-icon">🦜</div>
+        <span class="wb-name">Cockatoo</span>
+      </div>
+      <div class="wb-animal">
+        <div class="wb-icon">🦋</div>
+        <span class="wb-name">Butterfly</span>
+      </div>
+      <div class="wb-animal">
+        <div class="wb-icon">🌿</div>
+        <span class="wb-name">Native Flora</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN ──────────────────────────────────────────── -->
+  <main>
+
+    <!-- ── 01 · Scale of the Crisis ── -->
+    <section id="section-overview" class="viz-section section-cool">
+      <div class="section-container">
+
+        <span class="section-label label-teal">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Section 01
+        </span>
+        <div class="section-header">
+          <div class="section-num teal-num">01</div>
+          <div class="section-titles">
+            <h2>The Scale of the Crisis</h2>
+            <p>
+              Which Australian wildlife species are most at risk? How does the
+              threat distribution vary across Australia's states and territories?
+            </p>
+          </div>
+        </div>
+
+        <!-- bar chart — description RIGHT -->
+        <div class="chart-card accent-teal fade-up" data-chart-type="Bar Chart">
+          <div class="chart-body">
+            <div id="bar_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Mammals and birds account for the largest share of Australia's threatened species, but reptiles, frogs, and fish are also heavily represented — revealing the broad cross-taxonomic reach of the biodiversity crisis.
+            </aside>
+          </div>
+        </div>
+
+        <!-- map chart — description LEFT -->
+        <div class="chart-card accent-teal fade-up" data-chart-type="Choropleth">
+          <div class="chart-body chart-body--flip">
+            <div id="map_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Western Australia and New South Wales carry the heaviest burden of threatened species, reflecting their exceptional biodiversity and the intense land-use pressures concentrated along the eastern seaboard.
+            </aside>
+          </div>
+        </div>
+
+        <!-- dual-line — SCROLL (description below) -->
+        <div class="chart-card accent-forest chart-card--scroll fade-up" data-chart-type="Dual Line">
+          <div class="chart-body">
+            <div id="indexed_dual_line_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              As ALA biodiversity monitoring records continue to grow, EPBC threatened listings rise in parallel — suggesting that expanded surveying is uncovering species at risk faster than conservation efforts can recover them.
+            </aside>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 02 · Species Composition & Habitat Loss ── -->
+    <section id="section-composition" class="viz-section section-white">
+      <div class="section-container">
+      
+
+        <span class="section-label label-coral">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Section 02
+        </span>
+        <div class="section-header">
+          <div class="section-num coral-num">02</div>
+          <div class="section-titles">
+            <h2>Species Composition &amp; Habitat Loss</h2>
+            <p>
+              A hierarchical view of how threat severity is distributed across animal groups,
+              alongside the relationship between habitat loss and threatened status for individual species.
+            </p>
+          </div>
+        </div>
+
+        <!-- waffle + numbat image row -->
+        <div style="display:flex;gap:1.5rem;align-items:stretch;margin-bottom:32px;">
+          <!-- waffle — SCROLL (description below) -->
+          <div class="chart-card accent-coral chart-card--scroll fade-up" data-chart-type="Waffle" style="flex:1;min-width:0;margin-bottom:0;">
+            <div class="chart-body">
+              <div id="waffle_chart" class="chart-embed"></div>
+              <aside class="chart-desc">
+                <span class="chart-desc__label">Insight</span>
+                Nearly two in five listed species are classified as Endangered, while Critically Endangered species — those one step from extinction — make up a significant and growing share of the total.
+              </aside>
+            </div>
+          </div>
+          <!-- numbat image card -->
+          <div class="chart-card accent-coral fade-up" style="flex:0 0 260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1.5rem;margin-bottom:0;">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Numbat.jpg?width=600"
+              alt="Numbat — an endangered Australian marsupial"
+              style="width:100%;border-radius:8px;object-fit:cover;"
+            >
+            <p style="margin:0;font-size:0.82rem;color:#6B5B4D;text-align:center;">
+              <strong>Numbat</strong> (<em>Myrmecobius fasciatus</em>)<br>
+              Endangered · EPBC Act listed
+            </p>
+          </div>
+        </div>
+
+        <!-- scatter — SCROLL (description below) -->
+        <div class="chart-card accent-coral chart-card--scroll fade-up" data-chart-type="Scatter">
+          <div class="chart-body">
+            <div id="scatter_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Species that have lost the greatest proportion of their habitat are overwhelmingly listed as Endangered or Critically Endangered, making the direct link between land clearing and extinction risk strikingly clear.
+            </aside>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 03 · Trends & Biological Pressures ── -->
+    <section id="section-trends" class="viz-section section-green">
+      <div class="section-container">
+
+        <span class="section-label label-forest">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Section 03
+        </span>
+        <div class="section-header">
+          <div class="section-num forest-num">03</div>
+          <div class="section-titles">
+            <h2>Trends &amp; Biological Pressures</h2>
+            <p>
+              Tracking the accelerating growth in EPBC-listed threatened species over time,
+              and the leading biological forces — invasive predators, disease, competition —
+              driving that decline.
+            </p>
+          </div>
+        </div>
+
+        <!-- line chart — description RIGHT -->
+        <div class="chart-card accent-forest fade-up" data-chart-type="Line Chart">
+          <div class="chart-body">
+            <div id="line_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Both animal and plant listings have climbed steadily since the EPBC Act came into force in 2000, with the total number of threatened species more than doubling over two decades of continuous monitoring.
+            </aside>
+          </div>
+        </div>
+
+        <!-- radial chart — description LEFT -->
+        <div class="chart-card accent-forest fade-up" data-chart-type="Radial Bar">
+          <div class="chart-body chart-body--flip">
+            <div id="radial_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Invasive animals, altered fire regimes, and vegetation clearing are the dominant biological pressures — each affecting hundreds of listed species and compounding each other to accelerate the extinction crisis.
+            </aside>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 04 · Ecosystems Under Threat ── -->
+    <section id="section-ecosystems" class="viz-section section-fire">
+      <div class="section-container">
+
+        <span class="section-label label-ember">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>
+          Section 04
+        </span>
+        <div class="section-header">
+          <div class="section-num ember-num">04</div>
+          <div class="section-titles">
+            <h2>Ecosystems Under Threat</h2>
+            <p>
+              Comparing threatened ecological communities across Australia's states and territories,
+              and mapping the scale of planned and unplanned fire events from 2016 to 2021.
+            </p>
+          </div>
+        </div>
+
+        <!-- heatmap — SCROLL (description below) -->
+        <div class="chart-card accent-ember chart-card--scroll fade-up" data-chart-type="Heatmap">
+          <div class="chart-body">
+            <div id="heatmap_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Critically Endangered ecological communities are concentrated in New South Wales and Queensland, where decades of clearing and fragmentation have pushed entire habitat types to the brink of collapse.
+            </aside>
+          </div>
+        </div>
+
+        <!-- fire map — description RIGHT -->
+        <div class="chart-card accent-ember fade-up" data-chart-type="Proportional Symbol Map">
+          <div class="chart-body">
+            <div id="fire_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Northern Territory and Queensland recorded the most intense fire activity between 2016 and 2021. Circle size highlights where unplanned fires — the most ecologically disruptive — overlap with high-biodiversity regions.
+            </aside>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 05 · Wetland Health & Biodiversity Monitoring ── -->
+    <section id="section-conservation" class="viz-section section-leaf">
+      <div class="section-container"> 
+
+        <span class="section-label label-forest">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+          Section 05
+        </span>
+        <div class="section-header">
+          <div class="section-num forest-num">05</div>
+          <div class="section-titles">
+            <h2>Wetland Health &amp; Biodiversity Monitoring</h2>
+            <p>
+              Exploring wetland fill levels and waterbird populations across Murray-Darling Basin
+              survey sites, alongside ALA biodiversity monitoring records compared with
+              EPBC threatened species listing increases over time.
+            </p>
+          </div>
+        </div>
+
+        <!-- wetland map — description LEFT -->
+        <div class="chart-card accent-forest fade-up" data-chart-type="Dot Map">
+          <div class="chart-body chart-body--flip">
+            <div id="wetland_map_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Australia's 66 Ramsar-listed wetlands are spread across the continent, with the largest sites concentrated in the Murray-Darling Basin and Northern Territory, providing critical refuge for migratory and endemic waterbirds.
+            </aside>
+          </div>
+        </div>
+
+        <!-- bubble chart — description RIGHT -->
+        <div class="chart-card accent-forest fade-up" data-chart-type="Bubble">
+          <div class="chart-body">
+            <div id="bubble_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Wetland fill level is a strong predictor of waterbird abundance — survey sites with higher water levels consistently support larger bird populations, showing how water management decisions directly drive ecological outcomes.
+            </aside>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── 06 · Conservation Actions & Species Recovery ── -->
+    <section id="section-monitoring" class="viz-section section-white">
+      <div class="section-container">
+        <span class="section-label label-ocean">
+          <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Section 06
+        </span>
+        <div class="section-header">
+          <div class="section-num ocean-num">06</div>
+          <div class="section-titles">
+            <h2>Conservation Actions &amp; Species Recovery</h2>
+            <p>
+              Ranking the conservation strategies that benefit the most threatened species,
+              and tracking the number of species successfully removed from the threatened list
+              over time as a measure of conservation progress.
+            </p>
+          </div>
+        </div>
+
+        <!-- lollipop — description LEFT -->
+        <div class="chart-card accent-ocean fade-up" data-chart-type="Lollipop">
+          <div class="chart-body chart-body--flip">
+            <div id="lollipop_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Predator and pest management benefits the greatest number of threatened species, followed by habitat protection and weed control — pointing to where conservation investment delivers the highest return for wildlife recovery.
+            </aside>
+          </div>
+        </div>
+
+        <!-- removed list — SCROLL (description below) -->
+        <div class="chart-card accent-ocean chart-card--scroll fade-up" data-chart-type="Area Chart">
+          <div class="chart-body">
+            <div id="removed_list_chart" class="chart-embed"></div>
+            <aside class="chart-desc">
+              <span class="chart-desc__label">Insight</span>
+              Removals from the threatened list are rare and uneven, peaking in years when formal reviews are completed. The overall rate of recovery remains far below the pace at which new species are added, underscoring the scale of the challenge ahead.
+            </aside>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-wave-top" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <div class="footer-emblem" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="32" cy="32" r="28" stroke-opacity="0.25"/>
+          <path d="M32 10 C18 10 10 20 10 32 C10 44 18 54 32 54 C46 54 54 44 54 32 C54 20 46 10 32 10Z" stroke-opacity="0.15" fill="none"/>
+          <path d="M20 32 Q26 22 32 32 Q38 42 44 32" stroke-opacity="0.5"/>
+          <circle cx="32" cy="32" r="3" fill="currentColor" opacity="0.3"/>
+        </svg>
+      </div>
+
+      <!-- Footer wildlife icons -->
+      <div class="footer-wildlife" aria-hidden="true">
+        <span>🦘</span><span>🐨</span><span>🦎</span><span>🐸</span><span>🦜</span><span>🦋</span>
+      </div>
+
+      <p class="footer-title">Australia's Threatened Species — Visualisation Atlas</p>
+      <p class="footer-sub">
+        Data sourced from the Australian Government Department of Climate Change,
+        Energy, the Environment and Water (DCCEEW) and the EPBC Act listings.
+      </p>
+      <p class="footer-sub">
+        Created for FIT2179 Data Visualisation &nbsp;·&nbsp; Monash University &nbsp;·&nbsp; 2024
+      </p>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="back-to-top" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="page.js"></script>
+</body>
+</html>

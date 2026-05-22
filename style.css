@@ -1,0 +1,926 @@
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --navy:    #0C2A3B;
+  --teal:    #1A8A99;
+  --forest:  #2D7A50;
+  --coral:   #C04F2D;
+  --ocean:   #1D5C8C;
+  --danger:  #B92525;
+  --ember:   #C75620;
+
+  --text:    #1F2937;
+  --muted:   #5A6678;
+  --rule:    rgba(0,0,0,0.08);
+
+  --bg-cool:  #EDF2F5;
+  --bg-green: #EEF5F1;
+  --bg-red:   #FFF2F2;
+  --bg-fire:  #FFF7F0;
+  --bg-leaf:  #EEF6EC;
+
+  --shadow-card: 0 2px 18px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+  --radius: 14px;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--bg-cool);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  background: linear-gradient(145deg, #061C2C 0%, #0E3D54 45%, #123C2C 100%);
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 80px 40px 120px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 75% 30%, rgba(26,138,153,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 20% 80%, rgba(45,122,80,0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: var(--bg-cool);
+  clip-path: ellipse(54% 100% at 50% 100%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 22px;
+  opacity: 0.9;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+}
+
+.hero-sub {
+  font-size: 1.02rem;
+  color: rgba(255,255,255,0.72);
+  max-width: 540px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+
+.hero-cta {
+  display: inline-block;
+  padding: 12px 32px;
+  background: var(--teal);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.4px;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(26,138,153,0.4);
+}
+
+.hero-cta:hover {
+  background: #1597a8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26,138,153,0.5);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(26,138,153,0.3);
+  padding: 0 32px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.top-nav a {
+  display: block;
+  padding: 14px 16px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.top-nav a:hover,
+.top-nav a.active {
+  color: #fff;
+  border-bottom-color: var(--teal);
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.viz-section { padding: 88px 40px 96px; }
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative; /* anchor for watermarks */
+}
+
+.section-cool  { background: var(--bg-cool)  radial-gradient(circle, rgba(26,138,153,0.09) 1.5px, transparent 1.5px) 0 0 / 30px 30px; }
+.section-white { background: #fff; }
+.section-green { background: var(--bg-green) radial-gradient(circle, rgba(45,122,80,0.08)  1.5px, transparent 1.5px) 0 0 / 30px 30px; }
+.section-red   { background: var(--bg-red); }
+.section-fire  { background: var(--bg-fire) radial-gradient(circle, rgba(199,86,32,0.07)  1.5px, transparent 1.5px) 0 0 / 30px 30px; }
+.section-leaf  { background: var(--bg-leaf) radial-gradient(circle, rgba(45,122,80,0.08)  1.5px, transparent 1.5px) 0 0 / 30px 30px; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  opacity: 0.75;
+}
+
+.section-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  stroke-width: 2.5;
+}
+.label-teal   { color: var(--teal);   }
+.label-coral  { color: var(--coral);  }
+.label-forest { color: var(--forest); }
+.label-ocean  { color: var(--ocean);  }
+.label-danger { color: var(--danger); }
+.label-ember  { color: var(--ember);  }
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.section-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -4px;
+  min-width: 90px;
+  flex-shrink: 0;
+  user-select: none;
+  opacity: 0.12;
+}
+.teal-num   { color: var(--teal);   }
+.coral-num  { color: var(--coral);  }
+.forest-num { color: var(--forest); }
+.ocean-num  { color: var(--ocean);  }
+.danger-num { color: var(--danger); }
+.ember-num  { color: var(--ember);  }
+
+.section-titles h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.22;
+  margin-bottom: 10px;
+}
+
+.section-titles p {
+  font-size: 0.97rem;
+  color: var(--muted);
+  max-width: 660px;
+  line-height: 1.72;
+}
+
+/* ============================================================
+   CHART BODY — chart + description side-by-side or below
+   ============================================================ */
+.chart-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 0; /* gap handled by desc panel padding/border */
+}
+
+/* desc on right (default) */
+.chart-body > .chart-embed {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* desc on left — flip order */
+.chart-body--flip {
+  flex-direction: row-reverse;
+}
+
+/* ── Description panel ─────────────────────────────────── */
+.chart-desc {
+  flex: 0 0 230px;
+  width: 230px;
+  padding: 24px 20px 24px 22px;
+  background: rgba(0,0,0,0.025);
+  border-left: 3px solid var(--sec, #aaa);
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-self: stretch; /* full height of row */
+}
+
+/* Decorative large quotation mark in background */
+.chart-desc::before {
+  content: '\201C';
+  position: absolute;
+  top: -10px;
+  left: 4px;
+  font-family: 'Playfair Display', serif;
+  font-size: 7rem;
+  line-height: 1;
+  color: var(--sec, #aaa);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Eyebrow label */
+.chart-desc__label {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sec, #aaa);
+  margin-bottom: 10px;
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+}
+
+/* Description text (the aside itself carries the text node) */
+.chart-desc {
+  font-size: 0.875rem;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+/* When desc is on the LEFT (flip): border swaps to right side */
+.chart-body--flip .chart-desc {
+  border-left: none;
+  border-right: 3px solid var(--sec, #aaa);
+  border-radius: 10px 0 0 10px;
+  padding-left: 20px;
+  padding-right: 22px;
+}
+
+.chart-body--flip .chart-desc::before {
+  left: auto;
+  right: 4px;
+}
+
+/* ── Scroll cards: description always below the chart ───── */
+.chart-card--scroll .chart-body {
+  flex-direction: column;
+}
+
+.chart-card--scroll .chart-body > .chart-embed {
+  flex: none;
+  width: 100%;
+}
+
+.chart-card--scroll .chart-desc {
+  flex: none;
+  width: 100%;
+  align-self: auto;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 20px 0 0;
+  margin-top: 20px;
+  border-top: 2px solid var(--sec, #aaa);
+}
+
+.chart-card--scroll .chart-desc::before {
+  display: none;
+}
+
+/* ── Narrow screens: always stack ───────────────────────── */
+@media (max-width: 960px) {
+  .chart-body,
+  .chart-body--flip {
+    flex-direction: column;
+  }
+
+  .chart-desc,
+  .chart-body--flip .chart-desc {
+    flex: none;
+    width: 100%;
+    align-self: auto;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 20px 0 0;
+    margin-top: 20px;
+    border-top: 2px solid var(--sec, #aaa);
+  }
+
+  .chart-desc::before,
+  .chart-body--flip .chart-desc::before {
+    display: none;
+  }
+}
+
+/* ============================================================
+   CHART GRID — side-by-side two-column layout
+   ============================================================ */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 0;
+}
+
+/* when a chart-row is preceded by a chart-card, add spacing above */
+.chart-card + .chart-row {
+  margin-top: 32px;
+}
+
+@media (max-width: 860px) {
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   CHART CARDS
+   ============================================================ */
+.chart-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 32px 32px 28px;
+  margin-bottom: 32px;
+  border-top: 4px solid transparent;
+  overflow: clip;
+  min-width: 0;
+  position: relative; /* needed for chart-type badge */
+  transition: box-shadow 0.22s;
+}
+
+.chart-card:hover {
+  box-shadow: 0 6px 32px rgba(0,0,0,0.11), 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* cards inside a chart-row don't need their own bottom margin */
+.chart-row .chart-card {
+  margin-bottom: 0;
+}
+
+.chart-card:last-child { margin-bottom: 0; }
+
+.accent-teal   { border-top-color: var(--teal);   --sec: var(--teal);   }
+.accent-coral  { border-top-color: var(--coral);  --sec: var(--coral);  }
+.accent-forest { border-top-color: var(--forest); --sec: var(--forest); }
+.accent-ocean  { border-top-color: var(--ocean);  --sec: var(--ocean);  }
+.accent-danger { border-top-color: var(--danger); --sec: var(--danger); }
+.accent-ember  { border-top-color: var(--ember);  --sec: var(--ember);  }
+
+/* allow very wide charts (e.g. treemap) to scroll within the card */
+.chart-card--scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.chart-card--center {
+  /* layout delegated to .chart-body */
+}
+
+/* ============================================================
+   RESPONSIVE SVG SCALING
+   prevent charts from causing page-level horizontal overflow
+   ============================================================ */
+.chart-embed {
+  display: block;
+  max-width: 100%;
+}
+
+.chart-embed svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--navy);
+  padding: 72px 40px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.footer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: #fff;
+  margin-bottom: 18px;
+}
+
+.footer-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   SCROLLBAR POLISH
+   ============================================================ */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(0,0,0,0.18); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+
+/* ============================================================
+   SECTION DIVIDER
+   ============================================================ */
+.viz-section + .viz-section {
+  border-top: 1px solid var(--rule);
+}
+
+/* ============================================================
+   READING PROGRESS BAR
+   ============================================================ */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--teal) 0%, var(--forest) 60%, var(--teal) 100%);
+  background-size: 200% 100%;
+  z-index: 1000;
+  transition: width 0.08s linear;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* ============================================================
+   HERO PARTICLES
+   ============================================================ */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-particles .p {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: rgba(26,138,153,0.45);
+  animation: particle-float var(--d) linear var(--dl) infinite;
+  box-shadow: 0 0 calc(var(--s) * 1.5) rgba(26,138,153,0.3);
+}
+
+@keyframes particle-float {
+  0%   { transform: translateY(0)    scale(1);   opacity: 0.7; }
+  40%  { opacity: 0.4; }
+  100% { transform: translateY(-600px) scale(0.3); opacity: 0; }
+}
+
+/* ============================================================
+   STATS STRIP
+   ============================================================ */
+.stats-strip {
+  background: var(--navy);
+  padding: 40px 40px;
+  border-bottom: 1px solid rgba(26,138,153,0.15);
+}
+
+.stats-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+  padding: 0 28px;
+}
+
+.stat-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+}
+
+.stat-suffix {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.55;
+  max-width: 148px;
+  display: block;
+  margin: 0 auto;
+  letter-spacing: 0.2px;
+}
+
+.stat-sep {
+  width: 1px;
+  height: 52px;
+  background: rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+@media (max-width: 580px) {
+  .stats-inner    { flex-direction: column; gap: 28px; }
+  .stat-sep       { width: 48px; height: 1px; }
+  .stat-label     { max-width: 220px; }
+}
+
+/* ============================================================
+   CHART TYPE BADGE  (data attribute → ::after pill)
+   ============================================================ */
+.chart-card[data-chart-type]::after {
+  content: attr(data-chart-type);
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--sec, #999);
+  opacity: 0.55;
+  border: 1px solid var(--sec, #ccc);
+  border-radius: 20px;
+  padding: 3px 9px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ============================================================
+   SCROLL FADE-UP ANIMATION
+   ============================================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* stagger children inside a flex row */
+.fade-up:nth-child(2) { transition-delay: 0.08s; }
+.fade-up:nth-child(3) { transition-delay: 0.16s; }
+
+/* ============================================================
+   BACK TO TOP BUTTON
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.28);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s, transform 0.25s, background 0.2s;
+  z-index: 300;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.back-to-top:hover {
+  background: var(--teal);
+}
+
+.back-to-top svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================================
+   FOOTER DECORATIVE WAVE + EMBLEM
+   ============================================================ */
+.site-footer {
+  position: relative;
+}
+
+.footer-wave-top {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--navy);
+  clip-path: ellipse(52% 100% at 50% 100%);
+  pointer-events: none;
+}
+
+.footer-emblem {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  color: rgba(255,255,255,0.3);
+}
+
+.footer-emblem svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================
+   HERO KANGAROO SILHOUETTE
+   ============================================================ */
+.hero-silhouette {
+  position: absolute;
+  right: 4%;
+  bottom: 60px;
+  width: clamp(160px, 20vw, 280px);
+  color: rgba(255,255,255,0.055);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-silhouette svg {
+  width: 100%;
+  height: auto;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+@media (max-width: 700px) {
+  .hero-silhouette { display: none; }
+}
+
+/* ============================================================
+   WILDLIFE SHOWCASE STRIP
+   ============================================================ */
+.wildlife-strip {
+  background: linear-gradient(135deg, #071622 0%, #0C2333 50%, #071A14 100%);
+  padding: 22px 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.wildlife-strip__inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.wb-animal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+}
+
+.wb-icon {
+  font-size: 1.55rem;
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  line-height: 1;
+}
+
+.wb-animal:hover .wb-icon {
+  background: rgba(26,138,153,0.18);
+  transform: translateY(-3px);
+}
+
+.wb-name {
+  font-size: 0.56rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .wildlife-strip { display: none; }
+}
+
+/* ============================================================
+   SECTION WATERMARKS
+   ============================================================ */
+.section-watermark {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 190px;
+  height: 190px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* tint each watermark with the section's accent colour */
+.section-cool  .section-watermark { color: var(--teal);   opacity: 0.07; }
+.section-white .section-watermark { color: var(--coral);  opacity: 0.06; }
+.section-green .section-watermark { color: var(--forest); opacity: 0.08; }
+.section-fire  .section-watermark { color: var(--ember);  opacity: 0.09; }
+.section-leaf  .section-watermark { color: var(--forest); opacity: 0.08; }
+
+.section-watermark svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* push content above watermark */
+.section-container > :not(.section-watermark) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 860px) {
+  .section-watermark { display: none; }
+}
+
+/* ============================================================
+   FOOTER WILDLIFE ICONS
+   WETLAND CHECK BOX
+   ============================================================ */
+.footer-wildlife {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.footer-wildlife span {
+  font-size: 1.3rem;
+  opacity: 0.45;
+  filter: grayscale(0.4);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.footer-wildlife span:hover {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+#wetland_map_chart .vega-bindings {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 6px !important;
+
+  width: fit-content !important;
+  min-width: 90px !important;
+
+  margin-left: 24px !important;
+  margin-bottom: 12px !important;
+
+  padding: 10px 12px !important;
+  background: #ffffff !important;
+  border: 1px solid #d6d3ce !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+#wetland_map_chart .vega-bind {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+
+  font-size: 12px !important;
+  color: #374151 !important;
+  white-space: nowrap !important;
+}
+
+#wetland_map_chart .vega-bind input[type="checkbox"] {
+  transform: scale(0.9);
+  margin-right: 4px;
+}
