@@ -1,0 +1,214 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Australia map showing Ramsar wetland locations with circle size representing site area in hectares.",
+  "title": {
+    "text": "Australian Ramsar Wetlands by Location and Site Area",
+    "subtitle": "Each dot represents a Ramsar wetland site; dot size shows site area in hectares",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "middle",
+    "color": "#2F241D",
+    "subtitleColor": "#6B5B4D"
+  },
+  "width": 750,
+  "height": 680,
+  "background": "white",
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 720
+  },
+  "params": [
+    {
+      "name": "showWA",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "WA "
+      }
+    },
+    {
+      "name": "showNT",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "NT "
+      }
+    },
+    {
+      "name": "showQLD",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "QLD "
+      }
+    },
+    {
+      "name": "showSA",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "SA "
+      }
+    },
+    {
+      "name": "showNSW",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "NSW "
+      }
+    },
+    {
+      "name": "showVIC",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "VIC "
+      }
+    },
+    {
+      "name": "showTAS",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "TAS "
+      }
+    },
+    {
+      "name": "showACT",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "ACT "
+      }
+    },
+    {
+      "name": "showEXT",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "EXT "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": {
+          "type": "json"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F5F5F0",
+        "stroke": "#333333",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "Ramsar_Wetlands_site_map_ready.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "toNumber(datum.longitude)",
+          "as": "longitude_num"
+        },
+        {
+          "calculate": "toNumber(datum.latitude)",
+          "as": "latitude_num"
+        },
+        {
+          "calculate": "toNumber(datum.area_ha)",
+          "as": "area_ha_num"
+        },
+        {
+          "filter": "isValid(datum.longitude_num) && isValid(datum.latitude_num) && isValid(datum.area_ha_num)"
+        },
+        {
+          "filter": "(datum.state == 'WA' && showWA) || (datum.state == 'NT' && showNT) || (datum.state == 'QLD' && showQLD) || (datum.state == 'SA' && showSA) || (datum.state == 'NSW' && showNSW) || (datum.state == 'VIC' && showVIC) || (datum.state == 'TAS' && showTAS) || (datum.state == 'ACT' && showACT) || (datum.state == 'EXT' && showEXT)"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.68,
+        "stroke": "#7A1F1F",
+        "strokeWidth": 0.5,
+        "color": "#C43C3C"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude_num",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude_num",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "area_ha_num",
+          "type": "quantitative",
+          "title": "Site area (ha)",
+          "scale": {
+            "type": "sqrt",
+            "range": [20, 1800]
+          },
+          "legend": {
+            "orient": "right",
+            "format": ",.0f",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+        "tooltip": [
+          {
+            "field": "RAMSAR_NAME",
+            "type": "nominal",
+            "title": "Ramsar wetland site"
+          },
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / Territory"
+          },
+          {
+            "field": "area_ha_num",
+            "type": "quantitative",
+            "title": "Site area (ha)",
+            "format": ",.0f"
+          },
+          {
+            "field": "longitude_num",
+            "type": "quantitative",
+            "title": "Longitude",
+            "format": ".2f"
+          },
+          {
+            "field": "latitude_num",
+            "type": "quantitative",
+            "title": "Latitude",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "title": {
+      "font": "Arial"
+    },
+    "legend": {
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    }
+  }
+}
