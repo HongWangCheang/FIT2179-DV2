@@ -1,0 +1,76 @@
+Animal_Group,Threat_Status,Count
+Actinopterygii,Endangered,27
+Actinopterygii,Vulnerable,16
+Actinopterygii,Critically Endangered,26
+Actinopterygii,Conservation Dependent,3
+Actinopterygii,Extinct in the wild,1
+Amphibia,Endangered,15
+Amphibia,Vulnerable,16
+Amphibia,Critically Endangered,18
+Amphibia,Extinct,4
+Anthozoa,Endangered,1
+Arachnida,Endangered,2
+Arachnida,Vulnerable,2
+Arachnida,Critically Endangered,1
+Asteroidea,Vulnerable,1
+Asteroidea,Critically Endangered,1
+Aves,Endangered,69
+Aves,Vulnerable,77
+Aves,Critically Endangered,18
+Aves,Extinct,22
+Bivalvia,Vulnerable,1
+Bivalvia,Critically Endangered,1
+Bryopsida,Vulnerable,1
+Cephalaspidomorphi,Endangered,1
+Chondrichthyes,Endangered,3
+Chondrichthyes,Vulnerable,5
+Chondrichthyes,Critically Endangered,2
+Chondrichthyes,Conservation Dependent,4
+Cycadatae,Endangered,7
+Cycadatae,Vulnerable,8
+Gastropoda,Endangered,8
+Gastropoda,Critically Endangered,14
+Insecta,Endangered,10
+Insecta,Vulnerable,5
+Insecta,Critically Endangered,13
+Liliopsida,Endangered,155
+Liliopsida,Vulnerable,95
+Liliopsida,Critically Endangered,76
+Liliopsida,Extinct,7
+Lycopodopiatae,Endangered,3
+Lycopodopiatae,Vulnerable,4
+Lycopodopiatae,Critically Endangered,1
+Lycopodopiatae,Extinct,2
+Magnoliopsida,Endangered,429
+Magnoliopsida,Vulnerable,444
+Magnoliopsida,Critically Endangered,221
+Magnoliopsida,Extinct,19
+Malacostraca,Endangered,26
+Malacostraca,Vulnerable,5
+Malacostraca,Critically Endangered,16
+Mammalia,Endangered,47
+Mammalia,Vulnerable,57
+Mammalia,Critically Endangered,9
+Mammalia,Extinct,39
+Oligochaeta,Vulnerable,1
+Oligochaeta,Critically Endangered,1
+Oligochaeta,Extinct,1
+Onychophora,Endangered,1
+Phaeophyceae,Endangered,1
+Pinatae,Endangered,1
+Pinatae,Critically Endangered,4
+Polypodiatae,Endangered,13
+Polypodiatae,Vulnerable,10
+Polypodiatae,Critically Endangered,3
+Polypodiatae,Extinct,5
+Psilotatae,Vulnerable,1
+Psilotatae,Extinct,1
+Remipedia,Vulnerable,1
+Reptilia,Endangered,40
+Reptilia,Vulnerable,34
+Reptilia,Critically Endangered,27
+Reptilia,Extinct,1
+Rhodophyceae,Extinct,1
+Sarcopterygii,Vulnerable,1
+Streptophyta,Endangered,1
+Streptophyta,Critically Endangered,1

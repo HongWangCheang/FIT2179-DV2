@@ -1,0 +1,104 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Top 10 Threatened Species Counts ",
+    "subtitle": "Total threatened species count for each class",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "subtitlePadding": 10
+  },
+  "width":780,
+  "height": 440,
+  "data": {
+    "url": "threatened_species.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "Count",
+          "as": "Total_Count"
+        }
+      ],
+      "groupby": ["Animal_Group"]
+    },
+    {
+      "window": [
+        {
+          "op": "dense_rank",
+          "as": "Rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "Total_Count",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.Rank <= 10"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4,
+    "color": "#8B5A2B"
+  },
+  "encoding": {
+    "y": {
+      "field": "Animal_Group",
+      "type": "nominal",
+      "sort": {
+        "field": "Total_Count",
+        "order": "descending"
+      },
+      "title": "Class",
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "titleadding" : 10
+      }
+    },
+    "x": {
+      "field": "Total_Count",
+      "type": "quantitative",
+      "title": "Total Number of Threatened Species",
+      "axis": {
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "offset": 10,
+        "titlePadding": 15
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Animal_Group",
+        "type": "nominal",
+        "title": "Animal Group"
+      },
+      {
+        "field": "Total_Count",
+        "type": "quantitative",
+        "title": "Total Count"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "grid": false,
+      "labelColor": "#440707",
+      "titleColor": "#111827"
+    },
+    "font": "Arial",
+    "background": "#FFFFFF"
+  }
+}
