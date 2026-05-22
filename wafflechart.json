@@ -1,0 +1,243 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#FAF8F3",
+  "vconcat": [
+    {
+      "title": {
+        "text": "Threatened Species in Australia by Conservation Status",
+        "subtitle": "Each icon represents approximately 1% of listed threatened species.",
+        "anchor": "start",
+        "fontSize": 20,
+        "subtitleFontSize": 13,
+        "fontWeight": "bold",
+        "color": "#2B2B2B",
+        "subtitleColor": "#555555"
+      },
+      "width": 650,
+      "height": 420,
+      "data": {
+        "url": "threatened_status_waffle_grid.csv"
+      },
+      "params": [
+        {
+          "name": "status_highlight",
+          "select": {
+            "type": "point",
+            "fields": ["Threatened status"],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "transform": [
+        {
+          "calculate": "datum['Threatened status'] == 'Endangered' ? '🐨' : datum['Threatened status'] == 'Vulnerable' ? '🦘' : datum['Threatened status'] == 'Critically Endangered' ? '🦜' : datum['Threatened status'] == 'Extinct' ? '🐻‍❄️' : '🐾'",
+          "as": "Species icon"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 28,
+        "align": "center",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "column",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": null
+        },
+        "y": {
+          "field": "row",
+          "type": "ordinal",
+          "sort": "descending",
+          "axis": null
+        },
+        "text": {
+          "field": "Species icon",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "Threatened status",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Endangered",
+              "Vulnerable",
+              "Critically Endangered",
+              "Extinct",
+              "Extinct in Wild and Conservation Dependent"
+            ],
+            "range": [
+              "#D9481E",
+              "#F2A93B",
+              "#7F1D1D",
+              "#4B5563",
+              "#2563EB"
+            ]
+          },
+          "legend": null
+        },
+        "opacity": {
+          "condition": {
+            "param": "status_highlight",
+            "value": 1
+          },
+          "value": 0.35
+        },
+        "tooltip": [
+          {
+            "field": "Threatened status",
+            "type": "nominal",
+            "title": "Status"
+          },
+          {
+            "field": "Count",
+            "type": "quantitative",
+            "title": "Species count"
+          },
+          {
+            "field": "Percentage",
+            "type": "quantitative",
+            "title": "Percentage"
+          },
+          {
+            "field": "Waffle squares",
+            "type": "quantitative",
+            "title": "Squares shown"
+          }
+        ]
+      }
+    },
+    {
+      "width": 420,
+      "height": 120,
+      "data": {
+        "values": [
+          {
+            "Threatened status": "Endangered",
+            "Species icon": "🐨",
+            "Count": 860,
+            "Percentage": 38.95,
+            "x": 0,
+            "y": 0
+          },
+          {
+            "Threatened status": "Vulnerable",
+            "Species icon": "🦘",
+            "Count": 785,
+            "Percentage": 35.55,
+            "x": 0,
+            "y": 1
+          },
+          {
+            "Threatened status": "Critically Endangered",
+            "Species icon": "🦜",
+            "Count": 453,
+            "Percentage": 20.52,
+            "x": 0,
+            "y": 2
+          },
+          {
+            "Threatened status": "Extinct",
+            "Species icon": "🐻‍❄️",
+            "Count": 102,
+            "Percentage": 4.62,
+            "x": 0,
+            "y": 3
+          },
+          {
+            "Threatened status": "Extinct in Wild and Conservation Dependent",
+            "Species icon": "🐾",
+            "Count": 8,
+            "Percentage": 0.37,
+            "x": 0,
+            "y": 4
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 20,
+            "align": "left",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {
+              "value": 10
+            },
+            "y": {
+              "field": "y",
+              "type": "ordinal",
+              "axis": null
+            },
+            "text": {
+              "field": "Species icon",
+              "type": "nominal"
+            },
+            "color": {
+              "field": "Threatened status",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Endangered",
+                  "Vulnerable",
+                  "Critically Endangered",
+                  "Extinct",
+                  "Extinct in Wild and Conservation Dependent"
+                ],
+                "range": [
+                  "#D9481E",
+                  "#F2A93B",
+                  "#7F1D1D",
+                  "#4B5563",
+                  "#2563EB"
+                ]
+              },
+              "legend": null
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "align": "left",
+            "baseline": "middle",
+            "color": "#333333"
+          },
+          "encoding": {
+            "x": {
+              "value": 45
+            },
+            "y": {
+              "field": "y",
+              "type": "ordinal",
+              "axis": null
+            },
+            "text": {
+              "field": "Threatened status",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "spacing": 8,
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labels": false,
+      "grid": false
+    }
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Habitat Loss vs Threatened Status of Australian Species",
+    "subtitle": "Bubble size = total habitat area; colour = plant/animal and threatened status",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "anchor": "middle"
+  },
+  "width": 850,
+  "height": 560,
+  "background": "#FAF8F3",
+
+  "data": {
+    "url": "habitat_loss_vs_threat_status_combined.csv"
+  },
+
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "max",
+          "field": "habitat_lost_million",
+          "as": "habitat_lost_million"
+        },
+        {
+          "op": "max",
+          "field": "proportion_lost_percent",
+          "as": "proportion_lost_percent"
+        },
+        {
+          "op": "max",
+          "field": "habitat_area",
+          "as": "habitat_area"
+        },
+        {
+          "op": "max",
+          "field": "status_severity_score",
+          "as": "status_severity_score"
+        },
+        {
+          "op": "min",
+          "field": "rank_in_original_chart",
+          "as": "rank_in_original_chart"
+        }
+      ],
+      "groupby": [
+        "species_name",
+        "chart_label",
+        "kingdom",
+        "class",
+        "family",
+        "threatened_status",
+        "status_code",
+        "profile_url"
+      ]
+    },
+    {
+      "calculate": "datum.kingdom == 'Animalia' ? 'Animal' : datum.kingdom == 'Plantae' ? 'Plant' : datum.kingdom",
+      "as": "kingdom_group"
+    },
+    {
+      "calculate": "datum.kingdom_group + ' - ' + datum.threatened_status",
+      "as": "kingdom_status"
+    },
+    {
+      "calculate": "datum.habitat_area / 1000000",
+      "as": "habitat_area_million"
+    }
+  ],
+
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [5, 5],
+        "color": "#888888",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "y": {
+          "aggregate": "mean",
+          "field": "proportion_lost_percent",
+          "type": "quantitative",
+          "title": "Average Habitat Loss %"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [5, 5],
+        "color": "#888888",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "mean",
+          "field": "habitat_lost_million",
+          "type": "quantitative",
+          "title": "Average Habitat Lost"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "opacity": 0.82,
+        "stroke": "white",
+        "strokeWidth": 1.4
+      },
+      "encoding": {
+        "x": {
+          "field": "habitat_lost_million",
+          "type": "quantitative",
+          "title": "Total Habitat Lost (million hectares)",
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "grid": true,
+            "format": ".1f"
+          }
+        },
+        "y": {
+          "field": "proportion_lost_percent",
+          "type": "quantitative",
+          "title": "Proportion of Habitat Lost (%)",
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "grid": true,
+            "format": ".1f"
+          }
+        },
+        "size": {
+          "field": "habitat_area_million",
+          "type": "quantitative",
+          "title": "Total Habitat Area (million ha)",
+          "scale": {
+            "range": [120, 2800]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 12,
+            "labelFontSize": 11,
+            "format": ".1f"
+          }
+        },
+        "color": {
+          "field": "kingdom_status",
+          "type": "nominal",
+          "title": "Group and Threatened Status",
+          "scale": {
+            "domain": [
+              "Animal - Endangered",
+              "Animal - Vulnerable",
+              "Plant - Endangered",
+              "Plant - Vulnerable"
+            ],
+            "range": [
+              "#FF2D55",
+              "#FF9500",
+              "#00C853",
+              "#00B0FF"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+        "shape": {
+          "field": "kingdom_group",
+          "type": "nominal",
+          "title": "Kingdom",
+          "scale": {
+            "domain": ["Animal", "Plant"],
+            "range": ["circle", "triangle-up"]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+        "tooltip": [
+          {
+            "field": "species_name",
+            "type": "nominal",
+            "title": "Species"
+          },
+          {
+            "field": "kingdom_group",
+            "type": "nominal",
+            "title": "Plant / Animal"
+          },
+          {
+            "field": "threatened_status",
+            "type": "nominal",
+            "title": "Threatened Status"
+          },
+          {
+            "field": "class",
+            "type": "nominal",
+            "title": "Class"
+          },
+          {
+            "field": "family",
+            "type": "nominal",
+            "title": "Family"
+          },
+          {
+            "field": "habitat_lost_million",
+            "type": "quantitative",
+            "title": "Habitat Lost (million ha)",
+            "format": ".3f"
+          },
+          {
+            "field": "proportion_lost_percent",
+            "type": "quantitative",
+            "title": "Habitat Lost %",
+            "format": ".2f"
+          },
+          {
+            "field": "habitat_area_million",
+            "type": "quantitative",
+            "title": "Total Habitat Area (million ha)",
+            "format": ".2f"
+          },
+          {
+            "field": "profile_url",
+            "type": "nominal",
+            "title": "Species Profile"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "dy": -7,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#222222"
+      },
+      "encoding": {
+        "x": {
+          "field": "habitat_lost_million",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "proportion_lost_percent",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "species_name",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "species_name",
+            "type": "nominal",
+            "title": "Species"
+          },
+          {
+            "field": "kingdom_group",
+            "type": "nominal",
+            "title": "Plant / Animal"
+          },
+          {
+            "field": "threatened_status",
+            "type": "nominal",
+            "title": "Threatened Status"
+          }
+        ]
+      }
+    }
+  ],
+
+  "resolve": {
+    "scale": {
+      "color": "independent",
+      "shape": "independent",
+      "size": "independent"
+    }
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelColor": "#333333",
+      "titleColor": "#333333",
+      "gridColor": "#DDDDDD",
+      "domainColor": "#999999",
+      "tickColor": "#999999"
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "titleColor": "#333333",
+      "labelColor": "#333333"
+    },
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial",
+      "color": "#222222",
+      "subtitleColor": "#555555"
+    }
+  }
+}

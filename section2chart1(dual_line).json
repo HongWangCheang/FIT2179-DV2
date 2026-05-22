@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Growth of Threatened Animals and Plants Over the Years",
+    "anchor": "start",
+    "fontSize": 18
+  },
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "overYars.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "fold": ["Animals", "Plants"],
+      "as": ["Category", "Count"]
+    },
+    {
+      "calculate": "toNumber(replace(toString(datum.Count), /,/g, ''))",
+      "as": "CountValue"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "quantitative",
+      "title": "Year",
+      "axis": {
+        "format": "d",
+        "values": [2006, 2011, 2016, 2021, 2026]
+      }
+    },
+    "y": {
+      "field": "CountValue",
+      "type": "quantitative",
+      "title": "Number of Threatened Species"
+    },
+    "color": {
+      "field": "Category",
+      "type": "nominal",
+      "title": "Category"
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "quantitative",
+        "title": "Year"
+      },
+      {
+        "field": "Category",
+        "type": "nominal",
+        "title": "Category"
+      },
+      {
+        "field": "CountValue",
+        "type": "quantitative",
+        "title": "Count"
+      }
+    ]
+  }
+}

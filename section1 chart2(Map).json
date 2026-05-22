@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Threatened Species in Australia by State/Territory",
+    "subtitle": "Darker blue indicates a higher number of threatened species",
+    "anchor": "middle",
+    "fontSize": 20,
+    "subtitleFontSize": 14
+  },
+  "width": 700,
+  "height": 600,
+  "data": {
+    "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 720
+  },
+  "transform": [
+    {
+      "calculate": "datum.properties.STATE_NAME == 'Australian Capital Territory' ? 'ACT' : datum.properties.STATE_NAME == 'New South Wales' ? 'NSW' : datum.properties.STATE_NAME == 'Northern Territory' ? 'NT' : datum.properties.STATE_NAME == 'Queensland' ? 'QLD' : datum.properties.STATE_NAME == 'South Australia' ? 'SA' : datum.properties.STATE_NAME == 'Tasmania' ? 'TAS' : datum.properties.STATE_NAME == 'Victoria' ? 'VIC' : datum.properties.STATE_NAME == 'Western Australia' ? 'WA' : null",
+      "as": "State"
+    },
+    {
+      "lookup": "State",
+      "from": {
+        "data": {
+          "url": "threatened_count.csv",
+          "format": {
+            "type": "csv"
+          }
+        },
+        "key": "State",
+        "fields": [" Threatened_species_count"]
+      }
+    },
+    {
+      "calculate": "toNumber(datum[' Threatened_species_count'])",
+      "as": "ThreatenedCount"
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "color": {
+      "field": "ThreatenedCount",
+      "type": "quantitative",
+      "title": "Threatened Species Count",
+      "scale": {
+        "range": [
+          "#b7dfd2",
+          "#8fc7c9",
+          "#63a8c6",
+          "#3e83b8",
+          "#2f63a3",
+          "#2d4c8c"
+        ]
+      },
+      "legend": {
+        "orient": "right",
+        "titleFontSize": 12,
+        "labelFontSize": 11
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.STATE_NAME",
+        "type": "nominal",
+        "title": "State/Territory"
+      },
+      {
+        "field": "State",
+        "type": "nominal",
+        "title": "State Code"
+      },
+      {
+        "field": "ThreatenedCount",
+        "type": "quantitative",
+        "title": "Threatened Species Count"
+      }
+    ]
+  }
+}

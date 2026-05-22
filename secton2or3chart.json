@@ -1,0 +1,214 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Biological Pressures Affecting EPBC-listed Species",
+    "subtitle": "Radial bar length shows the proportion of EPBC-listed species affected",
+    "anchor": "middle",
+    "fontSize": 20,
+    "subtitleFontSize": 13
+  },
+  "width": 660,
+  "height": 620,
+  "background": "white",
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 720
+  },
+  "data": {
+    "url": "soe2016biopressures-affecting-epbc-listed-species (1).csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum['Proportion of EPBC listed species (%)'])",
+      "as": "Proportion"
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "Rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "Proportion",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.Rank <= 10"
+    },
+    {
+      "calculate": "datum.Proportion / 100 * 6.28318530718",
+      "as": "EndAngle"
+    },
+    {
+      "calculate": "250 - datum.Rank * 18",
+      "as": "OuterRadius"
+    },
+    {
+      "calculate": "238 - datum.Rank * 18",
+      "as": "InnerRadius"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "cornerRadius": 5
+      },
+      "encoding": {
+        "theta": {
+          "value": 0
+        },
+        "theta2": {
+          "value": 6.28318530718
+        },
+        "radius": {
+          "field": "OuterRadius",
+          "type": "quantitative",
+          "scale": null
+        },
+        "radius2": {
+          "field": "InnerRadius",
+          "type": "quantitative",
+          "scale": null
+        },
+        "color": {
+          "value": "#E5E7EB"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "arc",
+        "cornerRadius": 5,
+        "tooltip": true
+      },
+      "encoding": {
+        "theta": {
+          "value": 0
+        },
+        "theta2": {
+          "field": "EndAngle",
+          "type": "quantitative",
+          "scale": null
+        },
+        "radius": {
+          "field": "OuterRadius",
+          "type": "quantitative",
+          "scale": null
+        },
+        "radius2": {
+          "field": "InnerRadius",
+          "type": "quantitative",
+          "scale": null
+        },
+        "color": {
+          "field": "Threat",
+          "type": "nominal",
+          "title": "Biological Pressure",
+          "scale": {
+            "range": [
+              "#4E79A7",
+              "#F28E2B",
+              "#E15759",
+              "#76B7B2",
+              "#59A14F",
+              "#EDC948",
+              "#B07AA1",
+              "#FF9DA7",
+              "#9C755F",
+              "#BAB0AC"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "offset": 8,
+            "padding": 6,
+            "labelLimit": 320,
+            "titleLimit": 200,
+            "titleFontSize": 13,
+            "labelFontSize": 11,
+            "symbolType": "circle",
+            "symbolSize": 140,
+            "symbolOffset": 8
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Rank",
+            "type": "ordinal",
+            "title": "Rank"
+          },
+          {
+            "field": "Threat",
+            "type": "nominal",
+            "title": "Biological Pressure"
+          },
+          {
+            "field": "Proportion",
+            "type": "quantitative",
+            "title": "Affected EPBC-listed Species (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 14,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "value": "Top 10"
+        },
+        "color": {
+          "value": "#111827"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 12,
+        "dy": 18
+      },
+      "encoding": {
+        "text": {
+          "value": "Biological Pressures"
+        },
+        "color": {
+          "value": "#4B5563"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#FFFFFF",
+    "view": {
+      "stroke": "#CBD5E1",
+      "strokeWidth": 3
+    },
+    "font": "Arial",
+    "legend": {
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    },
+    "title": {
+      "color": "#111827",
+      "subtitleColor": "#4B5563"
+    }
+  }
+}
