@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
   "title": {
     "text": "Australian Forest Fire Activity by State/Territory",
     "subtitle": "Choropleth = total fire, circle size = unplanned fire",
@@ -7,6 +8,7 @@
     "subtitleFontSize": 13,
     "anchor": "middle"
   },
+
   "width": 725,
   "height": 600,
   "background": "#FAF8F3",
@@ -171,6 +173,10 @@
         {
           "calculate": "datum.total_fire_cells > 0 ? datum.unplanned_fire_cells / datum.total_fire_cells * 100 : 0",
           "as": "unplanned_fire_percent"
+        },
+        {
+          "calculate": "datum.latitude - 1.4",
+          "as": "circle_latitude"
         }
       ],
       "mark": {
@@ -187,7 +193,7 @@
           "title": "Longitude"
         },
         "latitude": {
-          "field": "latitude",
+          "field": "circle_latitude",
           "type": "quantitative",
           "title": "Latitude"
         },
