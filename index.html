@@ -121,6 +121,62 @@
     </div>
   </div>
 
+  <!-- ── OVERVIEW INTRO ──────────────────────────────────── -->
+  <div class="overview-intro">
+    <div class="overview-intro__inner">
+      <h2 class="overview-intro__heading">About This Visualisation</h2>
+      <p class="overview-intro__body">
+        Australia is one of the world's seventeen megadiverse countries, home to an estimated
+        <strong>600,000 species</strong> — many found nowhere else on Earth. Yet decades of habitat
+        clearing, invasive species, altered fire regimes, and climate change have pushed more than
+        <strong>1,900 species</strong> onto the national threatened list under the Environment Protection
+        and Biodiversity Conservation (EPBC) Act.
+      </p>
+      <p class="overview-intro__body">
+        This atlas brings together data from the EPBC Act listings, the Atlas of Living Australia (ALA),
+        the Murray-Darling Basin wetland surveys, and national fire monitoring datasets to tell the story
+        of Australia's biodiversity crisis — and the conservation efforts working against it.
+      </p>
+      <p class="overview-intro__body">
+        Each section pairs an interactive chart with a focused insight, letting you explore the data at
+        your own pace. Scroll through to move from the big picture — how many species, which states,
+        which groups — down to the pressures driving decline and the actions that offer hope for recovery.
+      </p>
+      <div class="overview-intro__tags">
+        <span class="oi-tag">🗺 Choropleth &amp; Dot Maps</span>
+        <span class="oi-tag">📊 Bar, Line &amp; Area Charts</span>
+        <span class="oi-tag">🔵 Bubble &amp; Waffle Charts</span>
+        <span class="oi-tag">🌡 Heatmaps &amp; Radial Charts</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAST FACTS STRIP ─────────────────────────────── -->
+  <div class="fast-facts">
+    <div class="fast-facts__inner">
+      <div class="ff-card ff-card--teal">
+        <div class="ff-icon">🐾</div>
+        <div class="ff-stat">100<span class="ff-plus">+</span></div>
+        <div class="ff-desc">mammal species<br>threatened nationally</div>
+      </div>
+      <div class="ff-card ff-card--coral">
+        <div class="ff-icon">🌿</div>
+        <div class="ff-stat">83<span class="ff-plus">%</span></div>
+        <div class="ff-desc">of flowering plants<br>found nowhere else on Earth</div>
+      </div>
+      <div class="ff-card ff-card--forest">
+        <div class="ff-icon">🦜</div>
+        <div class="ff-stat">200<span class="ff-plus">+</span></div>
+        <div class="ff-desc">bird species<br>on the threatened list</div>
+      </div>
+      <div class="ff-card ff-card--ember">
+        <div class="ff-icon">🔥</div>
+        <div class="ff-stat">2019</div>
+        <div class="ff-desc">Black Summer fires burned<br>18 million hectares</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── MAIN ──────────────────────────────────────────── -->
   <main>
 
@@ -149,7 +205,9 @@
             <div id="bar_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Mammals and birds account for the largest share of Australia's threatened species, but reptiles, frogs, and fish are also heavily represented — revealing the broad cross-taxonomic reach of the biodiversity crisis.
+              The crisis does not sit within one part of nature. 
+              Plants dominate the list, but animals are deeply affected too: birds, mammals, reptiles, frogs, and fish all appear among the most threatened groups. 
+              This shows that biodiversity loss is spreading across entire ecosystems, not just affecting a few isolated species.
             </aside>
           </div>
         </div>
@@ -160,7 +218,9 @@
             <div id="map_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Western Australia and New South Wales carry the heaviest burden of threatened species, reflecting their exceptional biodiversity and the intense land-use pressures concentrated along the eastern seaboard.
+              The map shows that the threatened species crisis is not evenly spread across Australia. Western Australia and New South Wales stand out as major pressure points, 
+              where rich biodiversity overlaps with expanding land use, habitat clearing, and development. 
+              These darker regions tell a story of ecosystems carrying both high natural value and heavy conservation risk.
             </aside>
           </div>
         </div>
@@ -171,13 +231,38 @@
             <div id="indexed_dual_line_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              As ALA biodiversity monitoring records continue to grow, EPBC threatened listings rise in parallel — suggesting that expanded surveying is uncovering species at risk faster than conservation efforts can recover them.
+              As monitoring expands, Australia is not simply finding more biodiversity 
+              — it is uncovering more species already under pressure. 
+              The rise in ALA records and EPBC listings suggests that better surveying is revealing hidden risk, 
+              while the taxonomic breakdown shows this crisis spreading across plants, birds, fish, mammals, reptiles, and frogs.
             </aside>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- ── SECTION 01 SUMMARY ── -->
+    <div class="sec-summary sec-summary--teal">
+      <div class="sec-summary__wave sec-summary__wave--teal" aria-hidden="true"></div>
+      <div class="sec-summary__inner">
+        <span class="sec-summary__num">01</span>
+        <div class="sec-summary__content">
+          <p class="sec-summary__label">Section Summary · Scale of the Crisis</p>
+          <p class="sec-summary__body">
+            Australia has <strong>more than 1,900 species</strong> listed as threatened under the EPBC Act — a number that has grown every year since 2000.
+            Plants make up the largest single group, but the crisis cuts across all of nature: mammals, birds, reptiles, frogs, and fish are all heavily represented.
+            Geographically, <strong>Western Australia</strong> and <strong>New South Wales</strong> carry the heaviest burden, where extraordinary biodiversity meets intense land-use pressure.
+            As surveying expands through programs like the ALA, new species at risk are being found faster than conservation efforts can recover them.
+          </p>
+          <div class="sec-summary__pills">
+            <span class="sec-pill sec-pill--teal">🐾 Cross-taxonomic crisis</span>
+            <span class="sec-pill sec-pill--teal">📍 WA &amp; NSW hotspots</span>
+            <span class="sec-pill sec-pill--teal">📈 Listings rising since 2000</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ── 02 · Species Composition & Habitat Loss ── -->
     <section id="section-composition" class="viz-section section-white">
@@ -207,37 +292,121 @@
               <div id="waffle_chart" class="chart-embed"></div>
               <aside class="chart-desc">
                 <span class="chart-desc__label">Insight</span>
-                Nearly two in five listed species are classified as Endangered, while Critically Endangered species — those one step from extinction — make up a significant and growing share of the total.
+                Most icons fall into Endangered and Vulnerable categories, showing that many species are already in serious decline. 
+                The Critically Endangered group is especially alarming, representing species standing at the edge of extinction and needing urgent protection.
               </aside>
             </div>
           </div>
-          <!-- numbat image card -->
-          <div class="chart-card accent-coral fade-up" style="flex:0 0 260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1.5rem;margin-bottom:0;">
-            <img
-              src="https://commons.wikimedia.org/wiki/Special:FilePath/Numbat.jpg?width=600"
-              alt="Numbat — an endangered Australian marsupial"
-              style="width:100%;border-radius:8px;object-fit:cover;"
-            >
-            <p style="margin:0;font-size:0.82rem;color:#6B5B4D;text-align:center;">
-              <strong>Numbat</strong> (<em>Myrmecobius fasciatus</em>)<br>
-              Endangered · EPBC Act listed
-            </p>
+          <!-- right column: numbat + shark stacked -->
+          <div style="display:flex;flex-direction:column;gap:1.5rem;flex:0 0 320px;">
+          <!-- numbat species spotlight card -->
+          <div class="numbat-spotlight fade-up">
+            <div class="numbat-spotlight__header">
+              <span class="numbat-spotlight__eyebrow">🔬 Species Spotlight</span>
+              <span class="numbat-spotlight__badge">Endangered</span>
+            </div>
+            <div class="numbat-spotlight__img-wrap">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Numbat.jpg?width=600"
+                alt="Numbat — an endangered Australian marsupial"
+                class="numbat-spotlight__img"
+              >
+            </div>
+            <div class="numbat-spotlight__body">
+              <p class="numbat-spotlight__name">Numbat</p>
+              <p class="numbat-spotlight__latin"><em>Myrmecobius fasciatus</em></p>
+              <div class="numbat-spotlight__facts">
+                <div class="numbat-fact">
+                  <span class="numbat-fact__icon">🌍</span>
+                  <span class="numbat-fact__text">Found only in a few areas of <strong>south-west WA</strong></span>
+                </div>
+                <div class="numbat-fact">
+                  <span class="numbat-fact__icon">🐜</span>
+                  <span class="numbat-fact__text">Eats up to <strong>20,000 termites</strong> per day</span>
+                </div>
+                <div class="numbat-fact">
+                  <span class="numbat-fact__icon">⚠️</span>
+                  <span class="numbat-fact__text">Fewer than <strong>1,000 individuals</strong> remain in the wild</span>
+                </div>
+              </div>
+              <p class="numbat-spotlight__epbc">EPBC Act listed · Western Shield program</p>
+            </div>
           </div>
-        </div>
 
-        <!-- scatter — SCROLL (description below) -->
-        <div class="chart-card accent-coral chart-card--scroll fade-up" data-chart-type="Scatter">
+          <!-- great white shark species spotlight card -->
+          <div class="numbat-spotlight fade-up">
+            <div class="numbat-spotlight__header">
+              <span class="numbat-spotlight__eyebrow">🔬 Species Spotlight</span>
+              <span class="numbat-spotlight__badge" style="background:#1D5C8C;">Vulnerable</span>
+            </div>
+            <div class="numbat-spotlight__img-wrap">
+              <img
+                src="white_shark.jpg"
+                alt="Great White Shark — a vulnerable Australian marine species"
+                class="numbat-spotlight__img"
+              >
+            </div>
+            <div class="numbat-spotlight__body">
+              <p class="numbat-spotlight__name">Great White Shark</p>
+              <p class="numbat-spotlight__latin"><em>Carcharodon carcharias</em></p>
+              <div class="numbat-spotlight__facts">
+                <div class="numbat-fact">
+                  <span class="numbat-fact__icon">🌊</span>
+                  <span class="numbat-fact__text">Found in <strong>temperate coastal waters</strong> around Australia</span>
+                </div>
+                <div class="numbat-fact">
+                  <span class="numbat-fact__icon">📉</span>
+                  <span class="numbat-fact__text">Population declined by over <strong>50%</strong> in recent decades</span>
+                </div>
+                <div class="numbat-fact">
+                  <span class="numbat-fact__icon">🎣</span>
+                  <span class="numbat-fact__text">Threatened by <strong>bycatch, finning</strong> and habitat loss</span>
+                </div>
+              </div>
+              <p class="numbat-spotlight__epbc">EPBC Act listed · Vulnerable since 1999</p>
+            </div>
+          </div>
+
+          </div><!-- end right column -->
+        </div><!-- end waffle + spotlights row -->
+
+        <!-- Bubble — SCROLL (description below) -->
+        <div class="chart-card accent-coral chart-card--scroll fade-up" data-chart-type="Bubble">
           <div class="chart-body">
-            <div id="scatter_chart" class="chart-embed"></div>
+            <div id="bubble_1chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Species that have lost the greatest proportion of their habitat are overwhelmingly listed as Endangered or Critically Endangered, making the direct link between land clearing and extinction risk strikingly clear.
+              This chart shows how habitat loss becomes a warning signal for extinction risk.
+              Species with the highest percentage of habitat lost sit in the danger zone, many already classified as Endangered.
+              Even species with larger remaining habitat areas are not safe,
+              showing that both the scale and intensity of land clearing shape Australia’s threatened species crisis.
             </aside>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- ── SECTION 02 SUMMARY ── -->
+    <div class="sec-summary sec-summary--coral">
+      <div class="sec-summary__wave sec-summary__wave--coral" aria-hidden="true"></div>
+      <div class="sec-summary__inner">
+        <span class="sec-summary__num">02</span>
+        <div class="sec-summary__content">
+          <p class="sec-summary__label">Section Summary · Species Composition &amp; Habitat Loss</p>
+          <p class="sec-summary__body">
+            Nearly <strong>two in five</strong> listed species are already classified as Endangered, while the Critically Endangered group — species one step from extinction — represents a significant and growing share.
+            The habitat loss analysis makes the mechanism clear: species that have lost the <strong>greatest proportion of their habitat</strong> are overwhelmingly Endangered or Critically Endangered.
+            Land clearing is not a background stressor — it is the primary driver pushing individual species toward the edge.
+          </p>
+          <div class="sec-summary__pills">
+            <span class="sec-pill sec-pill--coral">🦎 2 in 5 species Endangered</span>
+            <span class="sec-pill sec-pill--coral">🌿 Habitat loss = extinction risk</span>
+            <span class="sec-pill sec-pill--coral">⚠️ CE group growing</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ── 03 · Trends & Biological Pressures ── -->
     <section id="section-trends" class="viz-section section-green">
@@ -276,13 +445,48 @@
             <div id="radial_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Invasive animals, altered fire regimes, and vegetation clearing are the dominant biological pressures — each affecting hundreds of listed species and compounding each other to accelerate the extinction crisis.
+              Extinction risk is not caused by one single pressure. 
+              Invasive species, changed fire regimes, habitat clearing, climate stress, and human disturbance overlap like layers of pressure around the same ecosystems. 
+              Together, these forces create a chain reaction, pushing hundreds of EPBC-listed species closer to long-term decline.
             </aside>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- ── SECTION 03 SUMMARY ── -->
+    <div class="sec-summary sec-summary--forest">
+      <div class="sec-summary__wave sec-summary__wave--forest" aria-hidden="true"></div>
+      <div class="sec-summary__inner">
+        <span class="sec-summary__num">03</span>
+        <div class="sec-summary__content">
+          <p class="sec-summary__label">Section Summary · Trends &amp; Biological Pressures</p>
+          <p class="sec-summary__body">
+            The total number of EPBC-listed threatened species has <strong>more than doubled</strong> since the Act came into force in 2000, with both animals and plants climbing steadily across every year of monitoring.
+            Behind those numbers sit overlapping biological pressures: <strong>invasive animals</strong>, altered fire regimes, and vegetation clearing each affect hundreds of listed species — and they compound one another,
+            creating cascading effects that accelerate decline far beyond what any single threat could cause alone.
+          </p>
+          <div class="sec-summary__pills">
+            <span class="sec-pill sec-pill--forest">📊 Listings doubled since 2000</span>
+            <span class="sec-pill sec-pill--forest">🦊 Invasive animals #1 threat</span>
+            <span class="sec-pill sec-pill--forest">🔥 Compounding pressures</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PULL QUOTE ── -->
+    <div class="pull-quote-strip">
+      <div class="pq-inner">
+        <span class="pq-mark">"</span>
+        <blockquote class="pq-text">
+          Australia has lost more mammal species than any other continent in the last 200 years, contributing to about one-third of mammal extinctions globally.
+        </blockquote>
+        <span class="pq-mark pq-mark--close">"</span>
+      </div>
+      <p class="pq-source">— WIRES Australia, Wildlife Rescue Organisation</p>
+    </div>
 
     <!-- ── 04 · Ecosystems Under Threat ── -->
     <section id="section-ecosystems" class="viz-section section-fire">
@@ -309,8 +513,23 @@
             <div id="heatmap_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Critically Endangered ecological communities are concentrated in New South Wales and Queensland, where decades of clearing and fragmentation have pushed entire habitat types to the brink of collapse.
+              New South Wales stands out as the most intense hotspot, with Queensland and Western Australia also carrying serious pressure. 
+              These red zones suggest that long-term habitat clearing and fragmentation are not only threatening individual species, but pushing whole ecosystems toward endangered status.
             </aside>
+          </div>
+        </div>
+
+        <!-- Black Summer image -->
+        <div class="fire-image-card fade-up">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Australia_fires_January_2020_%28cropped%29.jpg/1280px-Australia_fires_January_2020_%28cropped%29.jpg"
+            alt="2019–20 Black Summer bushfires — glowing embers and smoke fill an Australian forest at night"
+            class="fire-image-card__img"
+          >
+          <div class="fire-image-card__caption">
+            <span class="fire-image-card__label">📷 Black Summer 2019–20</span>
+            Australia's most catastrophic fire season burned over <strong>18.6 million hectares</strong>,
+            killed an estimated <strong>3 billion animals</strong>, and pushed dozens of species closer to extinction.
           </div>
         </div>
 
@@ -320,13 +539,35 @@
             <div id="fire_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Northern Territory and Queensland recorded the most intense fire activity between 2016 and 2021. Circle size highlights where unplanned fires — the most ecologically disruptive — overlap with high-biodiversity regions.
+              The Northern Territory and Queensland appear as major fire zones, while large circles reveal where unplanned fires dominate. 
+              These patterns suggest that fire is not only frequent, but also difficult to control, placing already vulnerable ecosystems under repeated stress.
             </aside>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- ── SECTION 04 SUMMARY ── -->
+    <div class="sec-summary sec-summary--ember">
+      <div class="sec-summary__wave sec-summary__wave--ember" aria-hidden="true"></div>
+      <div class="sec-summary__inner">
+        <span class="sec-summary__num">04</span>
+        <div class="sec-summary__content">
+          <p class="sec-summary__label">Section Summary · Ecosystems Under Threat</p>
+          <p class="sec-summary__body">
+            The biodiversity crisis extends beyond individual species to entire habitats.
+            <strong>New South Wales and Queensland</strong> host the highest concentrations of Critically Endangered ecological communities — habitats so degraded that whole ecosystems are approaching collapse.
+            Fire compounds the pressure: between 2016 and 2021, <strong>Northern Territory and Queensland</strong> recorded the most intense fire activity, with large unplanned fires — the most ecologically disruptive type — repeatedly burning through high-biodiversity regions.
+          </p>
+          <div class="sec-summary__pills">
+            <span class="sec-pill sec-pill--ember">🏞️ NSW leads in CE communities</span>
+            <span class="sec-pill sec-pill--ember">🔥 NT &amp; QLD fire hotspots</span>
+            <span class="sec-pill sec-pill--ember">💥 Unplanned fires dominate</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ── 05 · Wetland Health & Biodiversity Monitoring ── -->
     <section id="section-conservation" class="viz-section section-leaf">
@@ -354,7 +595,9 @@
             <div id="wetland_map_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Australia's 66 Ramsar-listed wetlands are spread across the continent, with the largest sites concentrated in the Murray-Darling Basin and Northern Territory, providing critical refuge for migratory and endemic waterbirds.
+              This map shows Australia’s wetlands as a connected network of ecological refuges. 
+              The dots stretch across the states, but the largest wetlands stand out in the north and Murray–Darling Basin, 
+              where water systems support major bird habitats. Their uneven distribution highlights why protecting key wetland sites is essential for migratory and endemic waterbirds.
             </aside>
           </div>
         </div>
@@ -365,13 +608,37 @@
             <div id="bubble_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Wetland fill level is a strong predictor of waterbird abundance — survey sites with higher water levels consistently support larger bird populations, showing how water management decisions directly drive ecological outcomes.
+              When wetland fill levels rise, waterbird abundance often increases, revealing how healthy, 
+              well-watered sites become refuges for large bird populations. 
+              The pattern suggests that water management decisions can quickly shape whether wetlands support life or remain under ecological stress.
             </aside>
           </div>
         </div>
 
       </div>
     </section>
+
+    <!-- ── SECTION 05 SUMMARY ── -->
+    <div class="sec-summary sec-summary--forest">
+      <div class="sec-summary__wave sec-summary__wave--forest" aria-hidden="true"></div>
+      <div class="sec-summary__inner">
+        <span class="sec-summary__num">05</span>
+        <div class="sec-summary__content">
+          <p class="sec-summary__label">Section Summary · Wetland Health &amp; Biodiversity Monitoring</p>
+          <p class="sec-summary__body">
+            Australia's <strong>66 Ramsar-listed wetlands</strong> are unevenly distributed across the continent, with the largest sites concentrated in the Murray-Darling Basin and Northern Territory —
+            regions that provide critical refuge for migratory and endemic waterbirds.
+            Survey data from the Basin reveals a direct relationship: sites with <strong>higher water fill levels</strong> consistently support larger waterbird populations, demonstrating that water management decisions
+            have immediate ecological consequences for some of Australia's most threatened wildlife.
+          </p>
+          <div class="sec-summary__pills">
+            <span class="sec-pill sec-pill--forest">💧 66 Ramsar wetland sites</span>
+            <span class="sec-pill sec-pill--forest">🦆 Water levels drive bird counts</span>
+            <span class="sec-pill sec-pill--forest">🗺 Murray-Darling Basin focus</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ── 06 · Conservation Actions & Species Recovery ── -->
     <section id="section-monitoring" class="viz-section section-white">
@@ -409,7 +676,9 @@
             <div id="removed_list_chart" class="chart-embed"></div>
             <aside class="chart-desc">
               <span class="chart-desc__label">Insight</span>
-              Removals from the threatened list are rare and uneven, peaking in years when formal reviews are completed. The overall rate of recovery remains far below the pace at which new species are added, underscoring the scale of the challenge ahead.
+              This chart tells a story of slow and uneven recovery. Most years, only a few species are removed from the threatened list, 
+              while rare spikes show moments when formal reviews or conservation success become visible. 
+              The long gaps between peaks suggest that recovery is still fragile and far slower than the growth of the threatened species crisis.
             </aside>
           </div>
         </div>
@@ -417,7 +686,40 @@
       </div>
     </section>
 
+    <!-- ── SECTION 06 SUMMARY ── -->
+    <div class="sec-summary sec-summary--ocean">
+      <div class="sec-summary__wave sec-summary__wave--ocean" aria-hidden="true"></div>
+      <div class="sec-summary__inner">
+        <span class="sec-summary__num">06</span>
+        <div class="sec-summary__content">
+          <p class="sec-summary__label">Section Summary · Conservation Actions &amp; Species Recovery</p>
+          <p class="sec-summary__body">
+            Conservation works — but slowly. <strong>Predator and pest management</strong> benefits the greatest number of threatened species, followed by habitat protection and weed control,
+            pointing to where investment delivers the highest return.
+            Yet removals from the threatened list remain rare and uneven: most years see only a handful of species recover, with occasional peaks when formal reviews are completed.
+            The pace of recovery is <strong>far below</strong> the rate at which new species are added — a gap that underscores the scale of the challenge still ahead.
+          </p>
+          <div class="sec-summary__pills">
+            <span class="sec-pill sec-pill--ocean">🛡 Predator control = most impact</span>
+            <span class="sec-pill sec-pill--ocean">✅ Recovery is possible</span>
+            <span class="sec-pill sec-pill--ocean">⏳ But far too slow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
+
+  <!-- ── CLOSING BANNER ───────────────────────────────── -->
+  <div class="closing-banner">
+    <div class="closing-banner__inner">
+      <p class="closing-banner__eyebrow">Every species counts</p>
+      <h2 class="closing-banner__heading">The data tells the story.<br>Conservation writes the next chapter.</h2>
+      <div class="closing-banner__animals" aria-hidden="true">
+        <span>🦘</span><span>🐨</span><span>🦎</span><span>🐸</span><span>🦜</span><span>🦋</span><span>🐚</span><span>🌿</span>
+      </div>
+    </div>
+  </div>
 
   <!-- ── FOOTER ────────────────────────────────────────── -->
   <footer class="site-footer">
@@ -443,7 +745,7 @@
         Energy, the Environment and Water (DCCEEW) and the EPBC Act listings.
       </p>
       <p class="footer-sub">
-        Created for FIT2179 Data Visualisation &nbsp;·&nbsp; Monash University &nbsp;·&nbsp; 2024
+        Created for FIT2179 Data Visualisation &nbsp;·&nbsp; Monash University &nbsp;·&nbsp; 2026
       </p>
     </div>
   </footer>

@@ -23,47 +23,92 @@
       "as": "CountValue"
     }
   ],
-  "mark": {
-    "type": "line",
-    "point": true,
-    "strokeWidth": 3
-  },
-  "encoding": {
-    "x": {
-      "field": "Year",
-      "type": "quantitative",
-      "title": "Year",
-      "axis": {
-        "format": "d",
-        "values": [2006, 2011, 2016, 2021, 2026]
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": true,
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "title": "Year",
+          "axis": {
+            "format": "d",
+            "values": [2006, 2011, 2016, 2021, 2026]
+          }
+        },
+        "y": {
+          "field": "CountValue",
+          "type": "quantitative",
+          "title": "Number of Threatened Species"
+        },
+        "color": {
+          "field": "Category",
+          "type": "nominal",
+          "title": "Category"
+        },
+        "tooltip": [
+          {
+            "field": "Year",
+            "type": "quantitative",
+            "title": "Year"
+          },
+          {
+            "field": "Category",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "CountValue",
+            "type": "quantitative",
+            "title": "Count"
+          }
+        ]
       }
     },
-    "y": {
-      "field": "CountValue",
-      "type": "quantitative",
-      "title": "Number of Threatened Species"
-    },
-    "color": {
-      "field": "Category",
-      "type": "nominal",
-      "title": "Category"
-    },
-    "tooltip": [
-      {
-        "field": "Year",
-        "type": "quantitative",
-        "title": "Year"
+    {
+      "data": {
+        "values": [{ "Year": 2016, "note": "2016 EPBC\nfive-year review" }]
       },
-      {
-        "field": "Category",
-        "type": "nominal",
-        "title": "Category"
+      "mark": {
+        "type": "rule",
+        "strokeDash": [5, 4],
+        "color": "#888888",
+        "strokeWidth": 1.5
       },
-      {
-        "field": "CountValue",
-        "type": "quantitative",
-        "title": "Count"
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative"
+        }
       }
-    ]
-  }
+    },
+    {
+      "data": {
+        "values": [{ "Year": 2016, "label": "2016 EPBC review" }]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "dy": -80,
+        "fontSize": 10,
+        "fontStyle": "italic",
+        "color": "#555555"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
 }

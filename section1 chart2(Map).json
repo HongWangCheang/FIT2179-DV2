@@ -9,83 +9,140 @@
   },
   "width": 700,
   "height": 600,
-  "data": {
-    "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
-    "format": {
-      "type": "json",
-      "property": "features"
-    }
-  },
-  "projection": {
-    "type": "mercator",
-    "center": [134, -28],
-    "scale": 720
-  },
-  "transform": [
+  "layer": [
     {
-      "calculate": "datum.properties.STATE_NAME == 'Australian Capital Territory' ? 'ACT' : datum.properties.STATE_NAME == 'New South Wales' ? 'NSW' : datum.properties.STATE_NAME == 'Northern Territory' ? 'NT' : datum.properties.STATE_NAME == 'Queensland' ? 'QLD' : datum.properties.STATE_NAME == 'South Australia' ? 'SA' : datum.properties.STATE_NAME == 'Tasmania' ? 'TAS' : datum.properties.STATE_NAME == 'Victoria' ? 'VIC' : datum.properties.STATE_NAME == 'Western Australia' ? 'WA' : null",
-      "as": "State"
-    },
-    {
-      "lookup": "State",
-      "from": {
-        "data": {
-          "url": "threatened_count.csv",
-          "format": {
-            "type": "csv"
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "projection": {
+        "type": "mercator",
+        "center": [134, -28],
+        "scale": 720
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.STATE_NAME == 'Australian Capital Territory' ? 'ACT' : datum.properties.STATE_NAME == 'New South Wales' ? 'NSW' : datum.properties.STATE_NAME == 'Northern Territory' ? 'NT' : datum.properties.STATE_NAME == 'Queensland' ? 'QLD' : datum.properties.STATE_NAME == 'South Australia' ? 'SA' : datum.properties.STATE_NAME == 'Tasmania' ? 'TAS' : datum.properties.STATE_NAME == 'Victoria' ? 'VIC' : datum.properties.STATE_NAME == 'Western Australia' ? 'WA' : null",
+          "as": "State"
+        },
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "url": "threatened_count.csv",
+              "format": {
+                "type": "csv"
+              }
+            },
+            "key": "State",
+            "fields": [" Threatened_species_count"]
           }
         },
-        "key": "State",
-        "fields": [" Threatened_species_count"]
+        {
+          "calculate": "toNumber(datum[' Threatened_species_count'])",
+          "as": "ThreatenedCount"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "color": {
+          "field": "ThreatenedCount",
+          "type": "quantitative",
+          "title": "Threatened Species Count",
+          "scale": {
+            "range": [
+              "#b7dfd2",
+              "#8fc7c9",
+              "#63a8c6",
+              "#3e83b8",
+              "#2f63a3",
+              "#2d4c8c"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.STATE_NAME",
+            "type": "nominal",
+            "title": "State/Territory"
+          },
+          {
+            "field": "State",
+            "type": "nominal",
+            "title": "State Code"
+          },
+          {
+            "field": "ThreatenedCount",
+            "type": "quantitative",
+            "title": "Threatened Species Count"
+          }
+        ]
       }
     },
     {
-      "calculate": "toNumber(datum[' Threatened_species_count'])",
-      "as": "ThreatenedCount"
-    }
-  ],
-  "mark": {
-    "type": "geoshape",
-    "stroke": "white",
-    "strokeWidth": 1
-  },
-  "encoding": {
-    "color": {
-      "field": "ThreatenedCount",
-      "type": "quantitative",
-      "title": "Threatened Species Count",
-      "scale": {
-        "range": [
-          "#b7dfd2",
-          "#8fc7c9",
-          "#63a8c6",
-          "#3e83b8",
-          "#2f63a3",
-          "#2d4c8c"
+      "data": {
+        "values": [
+          { "longitude": 121.0, "latitude": -26.5, "label": "WA", "note": "Highest\nbiodiverse state" },
+          { "longitude": 146.5, "latitude": -32.0, "label": "NSW", "note": "Heavy eastern\nseaboard pressure" },
+          { "longitude": 144.5, "latitude": -23.0, "label": "QLD", "note": "" },
+          { "longitude": 135.0, "latitude": -19.5, "label": "NT", "note": "" },
+          { "longitude": 135.5, "latitude": -30.5, "label": "SA", "note": "" },
+          { "longitude": 146.5, "latitude": -41.5, "label": "TAS", "note": "" },
+          { "longitude": 144.5, "latitude": -37.0, "label": "VIC", "note": "" }
         ]
       },
-      "legend": {
-        "orient": "right",
-        "titleFontSize": 12,
-        "labelFontSize": 11
+      "projection": {
+        "type": "mercator",
+        "center": [134, -28],
+        "scale": 720
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#1a1a1a"
+      },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude":  { "field": "latitude",  "type": "quantitative" },
+        "text":      { "field": "label",      "type": "nominal" }
       }
     },
-    "tooltip": [
-      {
-        "field": "properties.STATE_NAME",
-        "type": "nominal",
-        "title": "State/Territory"
+    {
+      "data": {
+        "values": [
+          { "longitude": 121.0, "latitude": -28.2, "note": "Highest diversity" },
+          { "longitude": 146.5, "latitude": -33.6, "note": "Most listings" }
+        ]
       },
-      {
-        "field": "State",
-        "type": "nominal",
-        "title": "State Code"
+      "projection": {
+        "type": "mercator",
+        "center": [134, -28],
+        "scale": 720
       },
-      {
-        "field": "ThreatenedCount",
-        "type": "quantitative",
-        "title": "Threatened Species Count"
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontStyle": "italic",
+        "color": "#2d4c8c"
+      },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude":  { "field": "latitude",  "type": "quantitative" },
+        "text":      { "field": "note",       "type": "nominal" }
       }
-    ]
-  }
+    }
+  ]
 }

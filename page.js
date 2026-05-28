@@ -4,7 +4,7 @@ const charts = [
   { id: "bar_chart",               file: "chart 1 section1(bar).json" },
   { id: "map_chart",               file: "section1 chart2(Map).json" },
   { id: "waffle_chart",            file: "wafflechart.json" },
-  { id: "scatter_chart",           file: "scatterplot.json" },
+  { id: "bubble_1chart",           file: "scatterplot.json" },
   { id: "line_chart",              file: "section2chart1(dual_line).json" },
   { id: "radial_chart",            file: "secton2or3chart.json" },
   { id: "heatmap_chart",           file: "section3chart(heatmap).json" },
