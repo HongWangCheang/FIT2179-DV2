@@ -326,9 +326,11 @@ body {
 
 /* Description text (the aside itself carries the text node) */
 .chart-desc {
-  font-size: 0.875rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.92rem;
+  font-style: italic;
   color: var(--text);
-  line-height: 1.75;
+  line-height: 1.82;
 }
 
 /* When desc is on the LEFT (flip): border swaps to right side */
@@ -1009,6 +1011,7 @@ body {
 }
 
 .sec-summary--teal   { background: linear-gradient(120deg, #0d2f35 0%, #0e3d45 60%, #0a2a38 100%); color: var(--teal); }
+.sec-summary--teal .sec-summary__label { color: #46ADB5; opacity: 1; }
 .sec-summary--coral  { background: linear-gradient(120deg, #2e120a 0%, #3d1a0e 60%, #2a100a 100%); color: var(--coral); }
 .sec-summary--forest { background: linear-gradient(120deg, #0d2015 0%, #152e1c 60%, #0a1e10 100%); color: var(--forest); }
 .sec-summary--ember  { background: linear-gradient(120deg, #2e1505 0%, #3a1c08 60%, #281205 100%); color: var(--ember); }
@@ -1054,17 +1057,25 @@ body {
 
 .sec-summary__body {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 0.98rem;
+  font-weight: 300;
+  letter-spacing: 0.018em;
+  line-height: 1.88;
   color: rgba(255, 255, 255, 0.78);
   margin: 0 0 22px 0;
 }
 
 .sec-summary__body strong {
-  color: currentColor;
-  filter: brightness(1.6);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0;
+  filter: none;
 }
+
+.sec-summary--teal   .sec-summary__body strong { color: #7fd4de; }
+.sec-summary--coral  .sec-summary__body strong { color: #f4a08a; }
+.sec-summary--forest .sec-summary__body strong { color: #80c99a; }
+.sec-summary--ember  .sec-summary__body strong { color: #f4b07a; }
+.sec-summary--ocean  .sec-summary__body strong { color: #90d8ff; }
 
 .sec-summary__pills {
   display: flex;

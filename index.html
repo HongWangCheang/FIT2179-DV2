@@ -285,90 +285,100 @@
         </div>
 
         <!-- waffle + numbat image row -->
-        <div style="display:flex;gap:1.5rem;align-items:stretch;margin-bottom:32px;">
+        <div style="display:flex;gap:1.5rem;align-items:stretch;margin-bottom:1.5rem;">
           <!-- waffle — SCROLL (description below) -->
           <div class="chart-card accent-coral chart-card--scroll fade-up" data-chart-type="Waffle" style="flex:1;min-width:0;margin-bottom:0;">
             <div class="chart-body">
               <div id="waffle_chart" class="chart-embed"></div>
               <aside class="chart-desc">
                 <span class="chart-desc__label">Insight</span>
-                Most icons fall into Endangered and Vulnerable categories, showing that many species are already in serious decline. 
+                Most icons fall into Endangered and Vulnerable categories, showing that many species are already in serious decline.
                 The Critically Endangered group is especially alarming, representing species standing at the edge of extinction and needing urgent protection.
               </aside>
             </div>
           </div>
-          <!-- right column: numbat + shark stacked -->
-          <div style="display:flex;flex-direction:column;gap:1.5rem;flex:0 0 320px;">
-          <!-- numbat species spotlight card -->
-          <div class="numbat-spotlight fade-up">
-            <div class="numbat-spotlight__header">
-              <span class="numbat-spotlight__eyebrow">🔬 Species Spotlight</span>
-              <span class="numbat-spotlight__badge">Endangered</span>
-            </div>
-            <div class="numbat-spotlight__img-wrap">
-              <img
-                src="https://commons.wikimedia.org/wiki/Special:FilePath/Numbat.jpg?width=600"
-                alt="Numbat — an endangered Australian marsupial"
-                class="numbat-spotlight__img"
-              >
-            </div>
-            <div class="numbat-spotlight__body">
-              <p class="numbat-spotlight__name">Numbat</p>
-              <p class="numbat-spotlight__latin"><em>Myrmecobius fasciatus</em></p>
-              <div class="numbat-spotlight__facts">
-                <div class="numbat-fact">
-                  <span class="numbat-fact__icon">🌍</span>
-                  <span class="numbat-fact__text">Found only in a few areas of <strong>south-west WA</strong></span>
-                </div>
-                <div class="numbat-fact">
-                  <span class="numbat-fact__icon">🐜</span>
-                  <span class="numbat-fact__text">Eats up to <strong>20,000 termites</strong> per day</span>
-                </div>
-                <div class="numbat-fact">
-                  <span class="numbat-fact__icon">⚠️</span>
-                  <span class="numbat-fact__text">Fewer than <strong>1,000 individuals</strong> remain in the wild</span>
-                </div>
+          <!-- right column: numbat only -->
+          <div style="flex:0 0 300px;display:flex;flex-direction:column;">
+            <!-- numbat species spotlight card -->
+            <div class="numbat-spotlight fade-up" style="flex:1;">
+              <div class="numbat-spotlight__header">
+                <span class="numbat-spotlight__eyebrow">🔬 Species Spotlight</span>
+                <span class="numbat-spotlight__badge">Endangered</span>
               </div>
-              <p class="numbat-spotlight__epbc">EPBC Act listed · Western Shield program</p>
-            </div>
-          </div>
-
-          <!-- great white shark species spotlight card -->
-          <div class="numbat-spotlight fade-up">
-            <div class="numbat-spotlight__header">
-              <span class="numbat-spotlight__eyebrow">🔬 Species Spotlight</span>
-              <span class="numbat-spotlight__badge" style="background:#1D5C8C;">Vulnerable</span>
-            </div>
-            <div class="numbat-spotlight__img-wrap">
-              <img
-                src="white_shark.jpg"
-                alt="Great White Shark — a vulnerable Australian marine species"
-                class="numbat-spotlight__img"
-              >
-            </div>
-            <div class="numbat-spotlight__body">
-              <p class="numbat-spotlight__name">Great White Shark</p>
-              <p class="numbat-spotlight__latin"><em>Carcharodon carcharias</em></p>
-              <div class="numbat-spotlight__facts">
-                <div class="numbat-fact">
-                  <span class="numbat-fact__icon">🌊</span>
-                  <span class="numbat-fact__text">Found in <strong>temperate coastal waters</strong> around Australia</span>
-                </div>
-                <div class="numbat-fact">
-                  <span class="numbat-fact__icon">📉</span>
-                  <span class="numbat-fact__text">Population declined by over <strong>50%</strong> in recent decades</span>
-                </div>
-                <div class="numbat-fact">
-                  <span class="numbat-fact__icon">🎣</span>
-                  <span class="numbat-fact__text">Threatened by <strong>bycatch, finning</strong> and habitat loss</span>
-                </div>
+              <div class="numbat-spotlight__img-wrap" style="height:240px;overflow:hidden;position:relative;">
+                <img
+                  src="numbat.png"
+                  alt="Numbat — an endangered Australian marsupial"
+                  class="numbat-spotlight__img"
+                  style="width:100%;height:100%;object-fit:cover;display:block;"
+                >
               </div>
-              <p class="numbat-spotlight__epbc">EPBC Act listed · Vulnerable since 1999</p>
+              <div class="numbat-spotlight__body">
+                <p class="numbat-spotlight__name">Numbat</p>
+                <p class="numbat-spotlight__latin"><em>Myrmecobius fasciatus</em></p>
+                <div class="numbat-spotlight__facts">
+                  <div class="numbat-fact">
+                    <span class="numbat-fact__icon">🌍</span>
+                    <span class="numbat-fact__text">Found only in a few areas of <strong>south-west WA</strong></span>
+                  </div>
+                  <div class="numbat-fact">
+                    <span class="numbat-fact__icon">🐜</span>
+                    <span class="numbat-fact__text">Eats up to <strong>20,000 termites</strong> per day</span>
+                  </div>
+                  <div class="numbat-fact">
+                    <span class="numbat-fact__icon">⚠️</span>
+                    <span class="numbat-fact__text">Fewer than <strong>1,000 individuals</strong> remain in the wild</span>
+                  </div>
+                </div>
+                <p class="numbat-spotlight__epbc">EPBC Act listed · Western Shield program</p>
+              </div>
             </div>
-          </div>
-
           </div><!-- end right column -->
-        </div><!-- end waffle + spotlights row -->
+        </div><!-- end waffle + numbat row -->
+
+        <!-- great white shark spotlight — horizontal card below waffle: image | text | image -->
+        <div class="shark-spotlight fade-up" style="display:flex;gap:0;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.10);margin-bottom:1.5rem;background:#f0f6fb;">
+          <!-- left image -->
+          <div style="flex:0 0 300px;max-width:400px;min-height:260px;overflow:hidden;">
+            <img
+              src="white_shark.png"
+              alt="Great White Shark — a vulnerable Australian marine species"
+              style="width:100%;height:100%;object-fit:cover;display:block;min-height:260px;"
+            >
+          </div>
+          <!-- middle text -->
+          <div style="flex:1;padding:1.5rem 1.75rem;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem;">
+              <span style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#5C5047;">🔬 Species Spotlight</span>
+              <span style="background:#1D5C8C;color:#fff;font-size:0.7rem;font-weight:700;padding:2px 10px;border-radius:20px;letter-spacing:0.04em;">Vulnerable</span>
+            </div>
+            <p style="font-size:1.25rem;font-weight:700;color:#0d2a3e;margin:0 0 0.15rem;">Great White Shark</p>
+            <p style="font-size:0.85rem;color:#5C5047;font-style:italic;margin:0 0 1rem;"><em>Carcharodon carcharias</em></p>
+            <div style="display:flex;flex-direction:column;gap:0.55rem;">
+              <div style="display:flex;gap:0.6rem;align-items:flex-start;">
+                <span style="font-size:1rem;">🌊</span>
+                <span style="font-size:0.875rem;color:#374151;">Found in <strong>temperate coastal waters</strong> around Australia</span>
+              </div>
+              <div style="display:flex;gap:0.6rem;align-items:flex-start;">
+                <span style="font-size:1rem;">📉</span>
+                <span style="font-size:0.875rem;color:#374151;">Population declined by over <strong>50%</strong> in recent decades</span>
+              </div>
+              <div style="display:flex;gap:0.6rem;align-items:flex-start;">
+                <span style="font-size:1rem;">🎣</span>
+                <span style="font-size:0.875rem;color:#374151;">Threatened by <strong>bycatch, finning</strong> and habitat loss</span>
+              </div>
+            </div>
+            <p style="font-size:0.75rem;color:#6B7280;margin-top:1rem;padding-top:0.75rem;border-top:1px solid #d1dde8;">EPBC Act listed · Vulnerable since 1999</p>
+          </div>
+          <!-- right image -->
+          <div style="flex:0 0 300px;max-width:300px;min-height:260px;overflow:hidden;">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0506/4366/5101/files/The_Vital_Role_of_Great_White_Sharks_in_the_Marine_Ecosystem_1024x1024.jpg?v=1684175060"
+              alt="Great White Shark role in the marine ecosystem"
+              style="width:100%;height:100%;object-fit:cover;display:block;min-height:260px;"
+            >
+          </div>
+        </div><!-- end shark spotlight -->
 
         <!-- Bubble — SCROLL (description below) -->
         <div class="chart-card accent-coral chart-card--scroll fade-up" data-chart-type="Bubble">
@@ -522,7 +532,7 @@
         <!-- Black Summer image -->
         <div class="fire-image-card fade-up">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Australia_fires_January_2020_%28cropped%29.jpg/1280px-Australia_fires_January_2020_%28cropped%29.jpg"
+            src="black_summer_fire.png"
             alt="2019–20 Black Summer bushfires — glowing embers and smoke fill an Australian forest at night"
             class="fire-image-card__img"
           >
