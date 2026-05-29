@@ -2,7 +2,6 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Threatened Species in Australia by State/Territory",
-    "subtitle": "Darker blue indicates a higher number of threatened species",
     "anchor": "middle",
     "fontSize": 20,
     "subtitleFontSize": 14
@@ -121,12 +120,6 @@
       }
     },
     {
-      "data": {
-        "values": [
-          { "longitude": 121.0, "latitude": -28.2, "note": "Highest diversity" },
-          { "longitude": 146.5, "latitude": -33.6, "note": "Most listings" }
-        ]
-      },
       "projection": {
         "type": "mercator",
         "center": [134, -28],
