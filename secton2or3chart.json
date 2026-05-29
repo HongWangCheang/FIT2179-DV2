@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Biological Pressures Affecting EPBC-listed Species",
-    "subtitle": "Radial bar length shows the proportion of EPBC-listed species affected",
+    "subtitle": "Proportion of EPBC-listed species affected",
     "anchor": "middle",
     "fontSize": 20,
     "subtitleFontSize": 13
